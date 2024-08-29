@@ -16,7 +16,7 @@
 #define wifi_log(M, ...) custom_log("WIFI", M, ##__VA_ARGS__); web_log("WIFI", M, ##__VA_ARGS__);
 #define power_log(M, ...) custom_log("POWER", M, ##__VA_ARGS__); web_log("POWER", M, ##__VA_ARGS__);
 
-#define VERSION "v2.1.6"
+#define VERSION "v2.1.67"
 
 #define TYPE 1
 #define TYPE_NAME "zTC1"
@@ -59,7 +59,7 @@ typedef struct
     WiFiEvent last_wifi_status;
     char ap_name[32];
     char ap_key[32];
-    int task_count;
+    // char task_count;
     pTimedTask task_top;
     struct TimedTask timed_tasks[MAX_TASK_NUM];
 } user_config_t;

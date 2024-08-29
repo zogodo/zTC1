@@ -37,17 +37,25 @@
 #define HTTP_CONTENT_CSS_ZIP "text/css\r\nContent-Encoding: gzip\r\nCache-Control: public"
 #define HTTP_CONTENT_WOFF2 "font/woff2\r\nCache-Control: public"
 
-#define HTTPD_HDR_DEFORT (HTTPD_HDR_ADD_SERVER|HTTPD_HDR_ADD_CONN_CLOSE|HTTPD_HDR_ADD_PRAGMA_NO_CACHE)
-#define HTTPD_HDR_CACHE (HTTPD_HDR_ADD_SERVER|HTTPD_HDR_ADD_CONN_CLOSE|HTTPD_HDR_ADD_CACHE_CTRL_NO_CHK)
+#define HTTPD_HDR_DEFORT (HTTPD_HDR_ADD_SERVER | HTTPD_HDR_ADD_CONN_CLOSE | HTTPD_HDR_ADD_PRAGMA_NO_CACHE)
+#define HTTPD_HDR_CACHE (HTTPD_HDR_ADD_SERVER | HTTPD_HDR_ADD_CONN_CLOSE | HTTPD_HDR_ADD_CACHE_CTRL_NO_CHK)
 
-#define send_http(DATA, LEN, LABEL, P_ERR)                                                                 \
-    *(P_ERR) = httpd_send_all_header(req, HTTP_RES_200, LEN , HTTP_CONTENT_HTML_STR);                 \
+#define send_http(DATA, LEN, LABEL, P_ERR)                                                       \
+    *(P_ERR) = httpd_send_all_header(req, HTTP_RES_200, LEN, HTTP_CONTENT_PLAIN_TEXT_STR);             \
     require_noerr_action(*(P_ERR), LABEL, http_log("ERROR: Unable to send http DATA headers.")); \
-    *(P_ERR) = httpd_send_body(req->sock, (const unsigned char*)DATA, LEN);                           \
-    require_noerr_action(*(P_ERR), LABEL, http_log("ERROR: Unable to send http DATA body."));    \
+    *(P_ERR) = httpd_send_body(req->sock, (const unsigned char *)DATA, LEN);                     \
+    require_noerr_action(*(P_ERR), LABEL, http_log("ERROR: Unable to send http DATA body."));
+
+#define send_http_chunked_header(LABEL, P_ERR)                                     \
+    *(P_ERR) = http_send_chunked_header(req, HTTP_RES_200, HTTP_CONTENT_PLAIN_TEXT_STR); \
+    require_noerr_action(*(P_ERR), LABEL, http_log("ERROR: Unable to send http Chunked DATA headers."));
+
+#define send_http_chunked_data(DATA, LEN, LABEL, P_ERR) \
+    *(P_ERR) = httpd_send_chunk(req->sock, DATA, LEN);  \
+    require_noerr_action(*(P_ERR), LABEL, http_log("ERROR: Unable to send http Chunked DATA body."));
 
 #define TC1_STATUS_JSON \
-"{\
+    "{\
     'sockets':'%s',\
     'mode':%d,\
     'station_ssid':'%s',\
@@ -62,11 +70,10 @@
     'ip':'%s',\
     'mask':'%s',\
     'gateway':'%s',\
-    'up_time':%ld\
+    'up_time':'%s' \
 }"
 
-#define POWER_INFO_JSON "{'sockets':'%s','idx':%d,'len':%d,'p_count':%ld,'powers':[%s],'up_time':'%s'}"
+// #define POWER_INFO_JSON "{'sockets':'%s','idx':%d,'len':%d,'p_count':%ld,'up_time':'%s','powers':[%s]}"
 
 int AppHttpdStart(void);
 int AppHttpdStop();
-

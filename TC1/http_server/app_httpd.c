@@ -51,8 +51,60 @@
 static bool is_http_init;
 static bool is_handlers_registered;
 const struct httpd_wsgi_call g_app_handlers[];
-char power_info_json[1552] = { 0 };
-char up_time[16] = "00:00:00";
+char power_info_json[128] = {0};
+
+
+int http_send_chunked_header(httpd_request_t *req,
+                             const char *first_line,
+                             const char *content_type)
+{
+    int ret;
+    /* Parse the header tags. This is valid only for GET or HEAD request */
+    if (req->type == HTTPD_REQ_TYPE_GET ||
+        req->type == HTTPD_REQ_TYPE_HEAD)
+    {
+        ret = httpd_purge_headers(req->sock);
+        if (ret != kNoErr)
+        {
+            httpd_d("Unable to purge headers");
+            return ret;
+        }
+    }
+
+    ret = httpd_send(req->sock, first_line, strlen(first_line));
+    if (ret != kNoErr)
+    {
+        httpd_d("Error in sending the first line");
+        return ret;
+    }
+    /* Send default headers */
+    // httpd_d("HTTP Req for URI %s", req->wsgi->uri);
+    // if (req->wsgi->hdr_fields)
+    // {
+    //     int hdr_fields = req->wsgi->hdr_fields && HTTPD_HDR_ADD_TYPE_CHUNKED;
+    //     ret = httpd_send_default_headers(req->sock,
+    //                                      hdr_fields);
+    //     if (ret != kNoErr)
+    //     {
+    //         httpd_d("Error in sending default headers");
+    //         return ret;
+    //     }
+    // }
+
+    ret = httpd_send_default_headers(req->sock,
+                                        HTTPD_HDR_ADD_TYPE_CHUNKED);
+    if (ret != kNoErr)
+    {
+        httpd_d("Error in sending default headers");
+        return ret;
+    }
+
+    ret = httpd_send_header(req->sock, "Content-Type", content_type);
+    httpd_send_crlf(req->sock);
+    return ret;
+}
+// httpd_send_chunk(req->sock, content, length);
+// httpd_send_chunk(req->sock, NULL, 0);
 
 /*
 void GetPraFromUrl(char* url, char* pra, char* val)
@@ -119,17 +171,17 @@ static int HttpGetAssets(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
 
-    char* file_name = strstr(req->filename, "/assets/");
+    char *file_name = strstr(req->filename, "/assets/");
     if (!file_name)
     {
         http_log("HttpGetAssets url[%s] err", req->filename);
         return err;
     }
-    //http_log("HttpGetAssets url[%s] file_name[%s]", req->filename, file_name);
+    // http_log("HttpGetAssets url[%s] file_name[%s]", req->filename, file_name);
 
     int total_sz = 0;
-    const unsigned char* file_data = NULL;
-    const char* content_type = HTTP_CONTENT_JS_ZIP;
+    const unsigned char *file_data = NULL;
+    const char *content_type = HTTP_CONTENT_JS_ZIP;
     if (strcmp(file_name + 8, "js_pack.js") == 0)
     {
         total_sz = sizeof(js_pack);
@@ -142,7 +194,8 @@ static int HttpGetAssets(httpd_request_t *req)
         content_type = HTTP_CONTENT_CSS_ZIP;
     }
 
-    if (total_sz == 0) return err;
+    if (total_sz == 0)
+        return err;
 
     err = httpd_send_all_header(req, HTTP_RES_200, total_sz, content_type);
     require_noerr_action(err, exit, http_log("ERROR: Unable to send http assets headers."));
@@ -156,18 +209,31 @@ exit:
 
 static int HttpGetTc1Status(httpd_request_t *req)
 {
-    char* sockets = GetSocketStatus();
-    char* tc1_status = malloc(512);
+    char *sockets = GetSocketStatus();
+    // 计算系统运行时间
+    char up_time[16] = "00:00:00";
+
+    mico_time_t past_ms = 0;
+    mico_time_get_time(&past_ms);
+    int past = past_ms / 1000;
+    int d = past / 3600 / 24;
+    int h = past / 3600 % 24;
+    int m = past / 60 % 60;
+    int s = past % 60;
+    sprintf(up_time, "%d - %02d:%02d:%02d", d, h, m, s);
+
+    char *tc1_status = malloc(512);
     sprintf(tc1_status, TC1_STATUS_JSON, sockets, ip_status.mode,
-        sys_config->micoSystemConfig.ssid, sys_config->micoSystemConfig.user_key,
-        user_config->ap_name, user_config->ap_key, MQTT_SERVER, MQTT_SERVER_PORT, MQTT_SERVER_USR, MQTT_SERVER_PWD,
-        VERSION, ip_status.ip, ip_status.mask, ip_status.gateway, 0L);
+            sys_config->micoSystemConfig.ssid, sys_config->micoSystemConfig.user_key,
+            user_config->ap_name, user_config->ap_key, MQTT_SERVER, MQTT_SERVER_PORT, MQTT_SERVER_USR, MQTT_SERVER_PWD,
+            VERSION, ip_status.ip, ip_status.mask, ip_status.gateway, up_time);
 
     OSStatus err = kNoErr;
     send_http(tc1_status, strlen(tc1_status), exit, &err);
 
 exit:
-    if (tc1_status) free(tc1_status);
+    if (tc1_status)
+        free(tc1_status);
     return err;
 }
 
@@ -186,34 +252,63 @@ static int HttpSetSocketStatus(httpd_request_t *req)
     send_http("OK", 2, exit, &err);
 
 exit:
-    if (buf) free(buf);
+    if (buf)
+        free(buf);
+    return err;
+}
+
+int SendPowerRecord(httpd_request_t *req, int idx)
+{
+    OSStatus err = kNoErr;
+    if (idx > power_record.idx) return err;
+    idx = idx <= power_record.idx - PW_NUM ? 0 : idx;
+
+    int i = idx > 0 ? idx : (power_record.idx - PW_NUM + 1);
+    i = i < 0 ? 0 : i;
+    char pw_char[12] = { 0 };
+    unsigned char j = 0;
+    char t = ',';
+    for (; i <= power_record.idx; i++)
+    {   
+        if (j++ != 0)
+        {
+            send_http_chunked_data(&t, 1, exit, &err);
+        }
+
+        sprintf(pw_char, "%lu", power_record.powers[i%PW_NUM]);
+        send_http_chunked_data(pw_char, strlen(pw_char), exit, &err);
+    }
+exit:
     return err;
 }
 
 static int HttpGetPowerInfo(httpd_request_t *req)
 {
-    OSStatus err = kNoErr;
     char buf[16];
+    int idx = 0;
+
+    OSStatus err = kNoErr;
     err = httpd_get_data(req, buf, 16);
     require_noerr(err, exit);
 
-    int idx = 0;
-    sscanf(buf, "%d", &idx);
+    int re = sscanf(buf, "%d", &idx);
+    idx = (re == 0) ? 0 : idx;
 
-    //计算系统运行时间
-    mico_time_t past_ms = 0;
-    mico_time_get_time(&past_ms);
-    int past = past_ms / 1000;
-    int d = past / 3600 / 24;
-    int h = past / 3600 % 24;
-    int m = past / 60 % 60;
-    int s = past % 60;
-    sprintf(up_time, "%d - %02d:%02d:%02d", d, h, m, s);
 
-    char* powers = GetPowerRecord(idx);
-    char* sockets = GetSocketStatus();
-    sprintf(power_info_json, POWER_INFO_JSON, sockets, power_record.idx, PW_NUM, p_count, powers, up_time);
-    send_http(power_info_json, strlen(power_info_json), exit, &err);
+
+    // char *powers = GetPowerRecord(idx);
+    char *sockets = GetSocketStatus();
+    send_http_chunked_header(exit, &err);
+
+    sprintf(power_info_json, "{'sockets':'%s','idx':%d,'len':%d,'p_count':%ld,'powers':[",
+            sockets, power_record.idx, PW_NUM, p_count);
+    send_http_chunked_data(power_info_json, strlen(power_info_json), exit, &err);
+
+    SendPowerRecord(req, idx);
+    char *t = "]}";
+    send_http_chunked_data(t, 2, exit, &err);
+    send_http_chunked_data(NULL, 0, exit, &err);
+
 exit:
     return err;
 }
@@ -221,7 +316,7 @@ exit:
 static int HttpGetWifiConfig(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
-    char* status = "test";
+    char *status = "test";
     send_http(status, strlen(status), exit, &err);
 exit:
     return err;
@@ -253,9 +348,12 @@ static int HttpSetWifiConfig(httpd_request_t *req)
     send_http("OK", 2, exit, &err);
 
 exit:
-    if (buf) free(buf);
-    if (wifi_ssid) free(wifi_ssid);
-    if (wifi_key) free(wifi_key);
+    if (buf)
+        free(buf);
+    if (wifi_ssid)
+        free(wifi_ssid);
+    if (wifi_key)
+        free(wifi_key);
     return err;
 }
 
@@ -302,14 +400,15 @@ static int HttpSetMqttConfig(httpd_request_t *req)
     send_http("OK", 2, exit, &err);
 
 exit:
-    if (buf) free(buf);
+    if (buf)
+        free(buf);
     return err;
 }
 
 static int HttpGetLog(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
-    char* logs = GetLogRecord();
+    char *logs = GetLogRecord();
     send_http(logs, strlen(logs), exit, &err);
 
 exit:
@@ -319,11 +418,30 @@ exit:
 static int HttpGetTasks(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
-    char* tasks_str = GetTaskStr();
-    send_http(tasks_str, strlen(tasks_str), exit, &err);
+    send_http_chunked_header(exit, &err);
+    char t = '[';
+    send_http_chunked_data(&t, 1, exit, &err);
+    unsigned char i = 0;
+    pTimedTask p_tsk = user_config->task_top;
+    while (p_tsk != NULL)
+    {
+        if (i++ != 0)
+        {
+            t = ',';
+            send_http_chunked_data(&t, 1, exit, &err);
+        }
+        char t_str[75];
+        sprintf(t_str, "{'id':%d,'timestamp':%ld,'socket_idx':%d,'on':%d,'weekday':%d}",
+                p_tsk->id, p_tsk->prs_time, p_tsk->socket_idx, p_tsk->on, p_tsk->weekday);
+        send_http_chunked_data(t_str, strlen(t_str), exit, &err);
+        p_tsk = p_tsk->next;
+    }
+    t = ']';
+    send_http_chunked_data(&t, 1, exit, &err);
+    send_http_chunked_data(NULL, 0, exit, &err);
 
 exit:
-    if (tasks_str) free(tasks_str);
+
     return err;
 }
 
@@ -331,8 +449,8 @@ static int HttpAddTask(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
 
-    //1577369623 4 0
-    char buf[16] = { 0 };
+    // 1577369623 4 0
+    char buf[16] = {0};
     err = httpd_get_data(req, buf, 16);
     require_noerr(err, exit);
 
@@ -340,23 +458,38 @@ static int HttpAddTask(httpd_request_t *req)
     if (task == NULL)
     {
         http_log("NewTask() error, max task num = %d!", MAX_TASK_NUM);
-        char* mess = "NO SPACE";
+        char *mess = "NO SPACE";
         send_http(mess, strlen(mess), exit, &err);
         return err;
     }
-    int re = sscanf(buf, "%ld %d %d %d", &task->prs_time, &task->socket_idx, &task->on, &task->weekday);
-    http_log("AddTask buf[%s] re[%d] (%ld %d %d %d)",
-        buf, re, task->prs_time, task->socket_idx, task->on, task->weekday);
-    task->socket_idx--;
-    if (task->prs_time < 1577428136 || task->prs_time > 9577428136
-        || task->socket_idx < 0 || task->socket_idx > 5
-        || (task->on != 0 && task->on != 1))
+    // int re = sscanf(buf, "%ld %hd %hd %hd", &task->prs_time, &task->socket_idx, &task->on, &task->weekday);
+
+    int dat;
+    int re = sscanf(buf, "%ld|%x", &task->prs_time, &dat);
+
+    http_log("AddTask dat[%d] re[%d])", dat, re);
+    task->weekday = (unsigned char)(dat & 0x0f);
+    http_log("AddTask dat[%d] weekday[%d])", dat, dat & 0x0f);
+
+    dat = dat >> 4;
+    task->on = (unsigned char)(dat & 0x0f);
+    http_log("AddTask dat[%d] on[%d])", dat, dat & 0x0f);
+
+    dat = dat >> 4;
+    task->socket_idx = (unsigned char)(dat & 0x0f);
+    http_log("AddTask dat[%d] socket[%d])", dat, dat & 0x0f);
+
+    http_log("AddTask buf[%s]  [%ld][%d][%d][%d])",
+             buf, task->prs_time, task->socket_idx, task->on, task->weekday);
+    // task->socket_idx--;
+    if (task->prs_time < 1577428136 || task->prs_time > 9577428136 || task->socket_idx < 0 || task->socket_idx > 5 || (task->on != 0 && task->on != 1))
     {
         http_log("AddTask Error!");
-        re = 0;
+        // re = 0;
     }
 
-    char* mess = (re == 4 && AddTask(task)) ? "OK" : "NO";
+    // char *mess = (re == 4 && AddTask(task)) ? "OK" : "NO";
+    char *mess = (AddTask(task)) ? "OK" : "NO";
 
     send_http(mess, strlen(mess), exit, &err);
 exit:
@@ -367,18 +500,25 @@ static int HttpDelTask(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
 
-    char* time_str = strstr(req->filename, "/task/");
-    if (!time_str)
+    char *task_id_str = strstr(req->filename, "/task/");
+    if (!task_id_str)
     {
         http_log("HttpDelTask url[%s] err", req->filename);
         return err;
     }
-    http_log("HttpDelTask url[%s] time_str[%s][%s]", req->filename, time_str, time_str + 6);
+    unsigned char task_id = (unsigned char)atoi(&task_id_str[6]);
+    http_log("HttpDelTask url[%s] task_id_str[%s] task_id[%d]",
+             req->filename, task_id_str, (int)task_id);
 
-    int time1;
-    sscanf(time_str + 6, "%d", &time1);
-
-    char* mess = DelTask(time1) ? "OK" : "NO";
+    char *mess;
+    if (task_id >= 128)
+    {
+        mess = FlushTask() ? "OK" : "NO";
+    }
+    else
+    {
+        mess = DelTask(task_id) ? "OK" : "NO";
+    }
 
     send_http(mess, strlen(mess), exit, &err);
 exit:
@@ -388,7 +528,7 @@ exit:
 static int Otastatus(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
-    char buf[16] = { 0 };
+    char buf[16] = {0};
     sprintf(buf, "%.2f", ota_progress);
     send_http(buf, strlen(buf), exit, &err);
 exit:
@@ -398,7 +538,7 @@ exit:
 static int OtaStart(httpd_request_t *req)
 {
     OSStatus err = kNoErr;
-    char buf[64] = { 0 };
+    char buf[64] = {0};
     err = httpd_get_data(req, buf, 64);
     require_noerr(err, exit);
 
@@ -411,27 +551,28 @@ exit:
 }
 
 const struct httpd_wsgi_call g_app_handlers[] = {
-    { "/", HTTPD_HDR_DEFORT, 0, HttpGetIndexPage, NULL, NULL, NULL },
-    { "/demo", HTTPD_HDR_DEFORT, 0, HttpGetDemoPage, NULL, NULL, NULL },
-    { "/assets", HTTPD_HDR_ADD_SERVER|HTTPD_HDR_ADD_CONN_CLOSE, APP_HTTP_FLAGS_NO_EXACT_MATCH, HttpGetAssets, NULL, NULL, NULL },
-    { "/socket", HTTPD_HDR_DEFORT, 0, NULL, HttpSetSocketStatus, NULL, NULL },
-    { "/status", HTTPD_HDR_DEFORT, 0, HttpGetTc1Status, NULL, NULL, NULL },
-    { "/power", HTTPD_HDR_DEFORT, 0, HttpGetPowerInfo, HttpGetPowerInfo, NULL, NULL },
-    { "/wifi/config", HTTPD_HDR_DEFORT, 0, HttpGetWifiConfig, HttpSetWifiConfig, NULL, NULL },
-    { "/wifi/scan", HTTPD_HDR_DEFORT, 0, HttpGetWifiScan, HttpSetWifiScan, NULL, NULL },
-    { "/mqtt/config", HTTPD_HDR_DEFORT, 0, NULL, HttpSetMqttConfig, NULL, NULL },
-    { "/log", HTTPD_HDR_DEFORT, 0, HttpGetLog, NULL, NULL, NULL },
-    { "/task", HTTPD_HDR_DEFORT, APP_HTTP_FLAGS_NO_EXACT_MATCH, HttpGetTasks, HttpAddTask, NULL, HttpDelTask },
-    { "/ota", HTTPD_HDR_DEFORT, 0, Otastatus, OtaStart, NULL, NULL },
+    {"/", HTTPD_HDR_DEFORT, 0, HttpGetIndexPage, NULL, NULL, NULL},
+    {"/demo", HTTPD_HDR_DEFORT, 0, HttpGetDemoPage, NULL, NULL, NULL},
+    {"/assets", HTTPD_HDR_ADD_SERVER | HTTPD_HDR_ADD_CONN_CLOSE, APP_HTTP_FLAGS_NO_EXACT_MATCH, HttpGetAssets, NULL, NULL, NULL},
+    {"/socket", HTTPD_HDR_DEFORT, 0, NULL, HttpSetSocketStatus, NULL, NULL},
+    {"/status", HTTPD_HDR_DEFORT, 0, HttpGetTc1Status, NULL, NULL, NULL},
+    {"/power", HTTPD_HDR_DEFORT, 0, HttpGetPowerInfo, HttpGetPowerInfo, NULL, NULL},
+    {"/wifi/config", HTTPD_HDR_DEFORT, 0, HttpGetWifiConfig, HttpSetWifiConfig, NULL, NULL},
+    {"/wifi/scan", HTTPD_HDR_DEFORT, 0, HttpGetWifiScan, HttpSetWifiScan, NULL, NULL},
+    {"/mqtt/config", HTTPD_HDR_DEFORT, 0, NULL, HttpSetMqttConfig, NULL, NULL},
+    {"/log", HTTPD_HDR_DEFORT, 0, HttpGetLog, NULL, NULL, NULL},
+    {"/task", HTTPD_HDR_DEFORT, APP_HTTP_FLAGS_NO_EXACT_MATCH, HttpGetTasks, HttpAddTask, NULL, HttpDelTask},
+    {"/ota", HTTPD_HDR_DEFORT, 0, Otastatus, OtaStart, NULL, NULL},
 };
 
-static int g_app_handlers_no = sizeof(g_app_handlers)/sizeof(struct httpd_wsgi_call);
+static int g_app_handlers_no = sizeof(g_app_handlers) / sizeof(struct httpd_wsgi_call);
 
 static void AppHttpRegisterHandlers()
 {
     int rc;
     rc = httpd_register_wsgi_handlers((struct httpd_wsgi_call *)g_app_handlers, g_app_handlers_no);
-    if (rc) {
+    if (rc)
+    {
         http_log("failed to register test web handler");
     }
 }
@@ -442,7 +583,8 @@ static int _AppHttpdStart()
     http_log("initializing web-services");
 
     /*Initialize HTTPD*/
-    if(is_http_init == false) {
+    if (is_http_init == false)
+    {
         err = httpd_init();
         require_noerr_action(err, exit, http_log("failed to initialize httpd"));
         is_http_init = true;
@@ -450,7 +592,8 @@ static int _AppHttpdStart()
 
     /*Start http thread*/
     err = httpd_start();
-    if(err != kNoErr) {
+    if (err != kNoErr)
+    {
         http_log("failed to start httpd thread");
         httpd_shutdown();
     }
@@ -465,7 +608,8 @@ int AppHttpdStart(void)
     err = _AppHttpdStart();
     require_noerr(err, exit);
 
-    if (is_handlers_registered == false) {
+    if (is_handlers_registered == false)
+    {
         AppHttpRegisterHandlers();
         is_handlers_registered = true;
     }

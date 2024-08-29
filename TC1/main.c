@@ -32,7 +32,7 @@ void appRestoreDefault_callback(void * const user_config_data, uint32_t size)
     userConfigDefault->mqtt_user[0] = 0;
     userConfigDefault->mqtt_password[0] = 0;
     userConfigDefault->task_top = NULL;
-    userConfigDefault->task_count = 0;
+    // userConfigDefault->task_count = 0;
     userConfigDefault->version = USER_CONFIG_VERSION;
 
     int i;
@@ -42,7 +42,9 @@ void appRestoreDefault_callback(void * const user_config_data, uint32_t size)
     }
     for (i = 0; i < MAX_TASK_NUM; i++)
     {
+        userConfigDefault->timed_tasks[i].id = i;
         userConfigDefault->timed_tasks[i].on_use = false;
+        userConfigDefault->timed_tasks[i].next = NULL;
     }
     //mico_system_context_update(sys_config);
 }

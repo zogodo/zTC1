@@ -1,217 +1,274 @@
 ﻿<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>zTC1</title>
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="http://yuntong.icu/tc1/images/android-desktop.png">
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="http://yuntong.icu/tc1/images/ios-desktop.png">
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="http://yuntong.icu/tc1/images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
-    <link rel="shortcut icon" href="http://yuntong.icu/tc1/images/favicon.png">
-    <link rel="stylesheet" href="assets/css_pack.css">
-  </head>
-  <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-      <header class="demo-header mdl-layout__header">
-        <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">TC1</span>
-          <div class="mdl-layout-spacer"></div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-              <i class="material-icons"><svg><use xlink:href="#icon-search" /></svg></i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" id="search">
-              <label class="mdl-textfield__label" for="search">Enter your query...</label>
-            </div>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>zTC1</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- <link rel="icon" sizes="192x192" href="http://yuntong.icu/tc1/images/android-desktop.png"> -->
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+  <!-- <link rel="apple-touch-icon-precomposed" href="http://yuntong.icu/tc1/images/ios-desktop.png"> -->
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <!-- <meta name="msapplication-TileImage" content="http://yuntong.icu/tc1/images/touch/ms-touch-icon-144x144-precomposed.png"> -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+  <!-- <link rel="shortcut icon" href="http://yuntong.icu/tc1/images/favicon.png"> -->
+  <link rel="stylesheet" href="assets/css_pack.css">
+</head>
+
+<body>
+  <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <header class="demo-header mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">TC1</span>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+          <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+            <i class="material-icons"><svg>
+                <use xlink:href="#icon-search" />
+              </svg></i>
+          </label>
+          <div class="mdl-textfield__expandable-holder">
+            <input class="mdl-textfield__input" type="text" id="search">
+            <label class="mdl-textfield__label" for="search">Enter your query...</label>
           </div>
-          <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-            <i class="material-icons"><svg><use xlink:href="#icon-more_vert" /></svg></i>
+        </div>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+          <i class="material-icons"><svg>
+              <use xlink:href="#icon-more_vert" />
+            </svg></i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+          <li class="mdl-menu__item" onclick="ChangeLanguage('en')">English</li>
+          <li class="mdl-menu__item" onclick="ChangeLanguage('cn')">中文</li>
+          <li class="mdl-menu__item" onclick="ChangeLanguage('jp')">日本語</li>
+        </ul>
+      </div>
+    </header>
+    <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+      <header class="demo-drawer-header">
+        <!-- <img src="http://yuntong.icu/tc1/images/user.jpg" class="demo-avatar"> -->
+        <!-- <img width="112px" src="assets/user2.svg" class="demo-avatar"/> -->
+        <svg width="112pt" height="112pt" viewBox="0 0 112 112" class="demo-avatar">
+          <use xlink:href="#img-user" />
+        </svg>
+        <div class="demo-avatar-dropdown">
+          <span>hello@example.com</span>
+          <div class="mdl-layout-spacer"></div>
+          <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+            <i class="material-icons" role="presentation"><svg>
+                <use xlink:href="#icon-arrow_drop_down" />
+              </svg></i>
+            <span class="visuallyhidden">Accounts</span>
           </button>
-          <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-            <li class="mdl-menu__item" onclick="ChangeLanguage('en')">English</li>
-            <li class="mdl-menu__item" onclick="ChangeLanguage('cn')">中文</li>
-            <li class="mdl-menu__item" onclick="ChangeLanguage('jp')">日本語</li>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+            <li class="mdl-menu__item">hello@example.com</li>
+            <li class="mdl-menu__item">info@example.com</li>
+            <li class="mdl-menu__item"><i class="material-icons"><svg>
+                  <use xlink:href="#icon-add" />
+                </svg></i>Add another account...</li>
           </ul>
         </div>
       </header>
-      <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-        <header class="demo-drawer-header">
-          <!-- <img src="http://yuntong.icu/tc1/images/user.jpg" class="demo-avatar"> -->
-          <!-- <img width="112px" src="assets/user2.svg" class="demo-avatar"/> -->
-          <svg width="112pt" height="112pt" viewBox="0 0 112 112" class="demo-avatar"><use xlink:href="#img-user"/></svg>
-          <div class="demo-avatar-dropdown">
-            <span>hello@example.com</span>
-            <div class="mdl-layout-spacer"></div>
-            <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-              <i class="material-icons" role="presentation"><svg><use xlink:href="#icon-arrow_drop_down" /></svg></i>
-              <span class="visuallyhidden">Accounts</span>
-            </button>
-            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-              <li class="mdl-menu__item">hello@example.com</li>
-              <li class="mdl-menu__item">info@example.com</li>
-              <li class="mdl-menu__item"><i class="material-icons"><svg><use xlink:href="#icon-add" /></svg></i>Add another account...</li>
-            </ul>
-          </div>
-        </header>
-        <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-          <a class="mdl-navigation__link mdl-nav-active" href="javascript:ShowPage(1);">
-            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-              <svg><use xlink:href="#icon-home" /></svg>
-            </i>
-            <span class="lang" langKey="Home">主页</span>
-          </a>
-          <a class="mdl-navigation__link" href="javascript:ShowPage(2);">
-            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-              <svg><use xlink:href="#icon-settings" /></svg>
-            </i>
-            <span class="lang" langKey="Config">设置</span>
-          </a>
-          <a class="mdl-navigation__link" href="javascript:ShowPage(3);">
-            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-              <svg><use xlink:href="#icon-access_alarm" /></svg>
-            </i>
-            <span class="lang" langKey="TimedTask">定时任务</span>
-          </a>
-          <a class="mdl-navigation__link" href="javascript:ShowPage(4);">
-            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-              <svg><use xlink:href="#icon-info" /></svg>
-            </i>
-            <span class="lang" langKey="SystemStatus">系统状态</span>
-          </a>
-          <a class="mdl-navigation__link" href="javascript:ShowPage(5);">
-            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-              <svg><use xlink:href="#icon-cloud_download" /></svg>
-            </i>
-            <span class="lang" langKey="OTA">在线升级</span>
-          </a>
-          <a class="mdl-navigation__link" href="javascript:ShowPage(6);">
-            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-              <svg><use xlink:href="#icon-notes" /></svg>
-            </i>
-            <span class="lang" langKey="SystemLog">系统日志</span>
-          </a>
-          <a class="mdl-navigation__link" href="javascript:ShowPage(7);">
-            <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
-              <svg><use xlink:href="#icon-help" /></svg>
-            </i>
-            <span class="lang" langKey="About">关于</span>
-          </a>
-        </nav>
-      </div>
-      <main class="mdl-layout__content">
-        <div class="mdl-grid demo-content">
+      <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+        <a class="mdl-navigation__link mdl-nav-active" href="javascript:ShowPage(1);">
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+            <svg>
+              <use xlink:href="#icon-home" />
+            </svg>
+          </i>
+          <span class="lang" langKey="Home">主页</span>
+        </a>
+        <a class="mdl-navigation__link" href="javascript:ShowPage(2);">
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+            <svg>
+              <use xlink:href="#icon-settings" />
+            </svg>
+          </i>
+          <span class="lang" langKey="Config">设置</span>
+        </a>
+        <a class="mdl-navigation__link" href="javascript:ShowPage(3);">
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+            <svg>
+              <use xlink:href="#icon-access_alarm" />
+            </svg>
+          </i>
+          <span class="lang" langKey="TimedTask">定时任务</span>
+        </a>
+        <a class="mdl-navigation__link" href="javascript:ShowPage(4);">
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+            <svg>
+              <use xlink:href="#icon-info" />
+            </svg>
+          </i>
+          <span class="lang" langKey="SystemStatus">系统状态</span>
+        </a>
+        <a class="mdl-navigation__link" href="javascript:ShowPage(5);">
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+            <svg>
+              <use xlink:href="#icon-cloud_download" />
+            </svg>
+          </i>
+          <span class="lang" langKey="OTA">在线升级</span>
+        </a>
+        <a class="mdl-navigation__link" href="javascript:ShowPage(6);">
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+            <svg>
+              <use xlink:href="#icon-notes" />
+            </svg>
+          </i>
+          <span class="lang" langKey="SystemLog">系统日志</span>
+        </a>
+        <a class="mdl-navigation__link" href="javascript:ShowPage(7);">
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+            <svg>
+              <use xlink:href="#icon-help" />
+            </svg>
+          </i>
+          <span class="lang" langKey="About">关于</span>
+        </a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="mdl-grid demo-content">
 
 
-          <div class="page page1 demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
-            <div class="demo-options mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-              <div class="mdl-card__supporting-text">
+        <div
+          class="page page1 demo-cards mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+          <div
+            class="demo-options mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+            <div class="mdl-card__supporting-text">
 
-                <h3>插座控制</h3>
-                <!--
+              <h3>插座控制</h3>
+              <!--
                 <span class="mdl-list__item-secondary-action">
                   <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-0">
                     <input type="checkbox" id="list-switch-0" class="mdl-switch__input" checked />
                   </label>
                 </span>
                 -->
-                <ul id="socket_ul" class="demo-list-control mdl-list">
-                  <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                      <span class="lang" langKey="Socket">插座</span>-1
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
-                        <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
-                      </label>
-                    </span>
-                  </li>
-                  <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                      <span class="lang" langKey="Socket">插座</span>-2
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-2">
-                        <input type="checkbox" id="list-switch-2" class="mdl-switch__input" checked />
-                      </label>
-                    </span>
-                  </li>
-                  <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                      <span class="lang" langKey="Socket">插座</span>-3
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-3">
-                        <input type="checkbox" id="list-switch-3" class="mdl-switch__input" checked />
-                      </label>
-                    </span>
-                  </li>
-                  <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                      <span class="lang" langKey="Socket">插座</span>-4
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-4">
-                        <input type="checkbox" id="list-switch-4" class="mdl-switch__input" checked />
-                      </label>
-                    </span>
-                  </li>
-                  <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                      <span class="lang" langKey="Socket">插座</span>-5
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-5">
-                        <input type="checkbox" id="list-switch-5" class="mdl-switch__input" checked />
-                      </label>
-                    </span>
-                  </li>
-                  <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                      <span class="lang" langKey="Socket">插座</span>-6
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-6">
-                        <input type="checkbox" id="list-switch-6" class="mdl-switch__input" checked />
-                      </label>
-                    </span>
-                  </li>
-                </ul>
+              <ul id="socket_ul" class="demo-list-control mdl-list">
+                <li class="mdl-list__item">
+                  <span class="socket-list-primary-content mdl-list__item-primary-content">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" id="socket-name-1" value="插座-1">
+                      <label class="mdl-textfield__label" for="socket-name-1"><span class="lang"
+                          langKey="Socket">插座</span>-1</label>
+                    </div>
+                  </span>
+                  <span class="socket-list-secondary-action mdl-list__item-secondary-action">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+                      <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+                    </label>
+                  </span>
+                </li>
+                <li class="mdl-list__item">
+                  <span class="socket-list-primary-content mdl-list__item-primary-content">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" id="socket-name-2" value="插座-2">
+                      <label class="mdl-textfield__label" for="socket-name-2"><span class="lang"
+                          langKey="Socket">插座</span>-2</label>
+                    </div>
+                  </span>
+                  <span class="socket-list-secondary-action mdl-list__item-secondary-action">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-2">
+                      <input type="checkbox" id="list-switch-2" class="mdl-switch__input" checked />
+                    </label>
+                  </span>
+                </li>
+                <li class="mdl-list__item">
+                  <span class="socket-list-primary-content mdl-list__item-primary-content">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" id="socket-name-3" value="插座-3">
+                      <label class="mdl-textfield__label" for="socket-name-3"><span class="lang"
+                          langKey="Socket">插座</span>-3</label>
+                    </div>
+                  </span>
+                  <span class="socket-list-secondary-action mdl-list__item-secondary-action">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-3">
+                      <input type="checkbox" id="list-switch-3" class="mdl-switch__input" checked />
+                    </label>
+                  </span>
+                </li>
+                <li class="mdl-list__item">
+                  <span class="socket-list-primary-content mdl-list__item-primary-content">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" id="socket-name-4" value="插座-4">
+                      <label class="mdl-textfield__label" for="socket-name-4"><span class="lang"
+                          langKey="Socket">插座</span>-4</label>
+                    </div>
+                  </span>
+                  <span class="socket-list-secondary-action mdl-list__item-secondary-action">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-4">
+                      <input type="checkbox" id="list-switch-4" class="mdl-switch__input" checked />
+                    </label>
+                  </span>
+                </li>
+                <li class="mdl-list__item">
+                  <span class="socket-list-primary-content mdl-list__item-primary-content">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" id="socket-name-5" value="插座-5">
+                      <label class="mdl-textfield__label" for="socket-name-5"><span class="lang"
+                          langKey="Socket">插座</span>-5</label>
+                    </div>
+                  </span>
+                  <span class="socket-list-secondary-action mdl-list__item-secondary-action">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-5">
+                      <input type="checkbox" id="list-switch-5" class="mdl-switch__input" checked />
+                    </label>
+                  </span>
+                </li>
+                <li class="mdl-list__item">
+                  <span class="socket-list-primary-content mdl-list__item-primary-content">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                      <input class="mdl-textfield__input" type="text" id="socket-name-6" value="插座-6">
+                      <label class="mdl-textfield__label" for="socket-name-6"><span class="lang"
+                          langKey="Socket">插座</span>-6</label>
+                    </div>
+                  </span>
+                  <span class="socket-list-secondary-action mdl-list__item-secondary-action">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-6">
+                      <input type="checkbox" id="list-switch-6" class="mdl-switch__input" checked />
+                    </label>
+                  </span>
+                </li>
+              </ul>
 
-              </div>
             </div>
           </div>
+        </div>
 
-          <div id="ct-chart-par" class="page page1 mdl-card__supporting-text mdl-shadow--2dp mdl-cell mdl-cell--6-col"
-           style="height:315px;overflow-x:scroll;overflow-y:hidden;">
-            <table class="pw">
-              <tr>
-                <td>P: <span id="p" class="success">0</span> W</td>
-                <td>W: <span id="w" class="error">0</span> kW·h</td>
-              </tr>
-            </table>
-            <div id="ct-chart" class="ct-chart ct-perfect-fourth" style="height:280px;margin-top:20px;"></div>
+        <div id="ct-chart-par"
+          class="page page1 demo-cards mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"
+          style="height:427px;overflow-x:scroll;overflow-y:hidden;">
+          <table class="pw">
+            <tr>
+              <td>P: <span id="p" class="success">0</span> W</td>
+              <td>W: <span id="w" class="error">0</span> kW·h</td>
+            </tr>
+          </table>
+          <div id="ct-chart" class="ct-chart ct-perfect-fourth" style="height:410px;margin-top:20px;"></div>
+        </div>
+
+        <div class="page page2 mdl-cell mdl-cell--5-col demo-card-square mdl-card mdl-shadow--2dp"
+          style="overflow: unset;">
+          <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">网络设置</h2>
           </div>
-
-          <div class="page page2 mdl-cell mdl-cell--5-col demo-card-square mdl-card mdl-shadow--2dp" style="overflow: unset;">
-            <div class="mdl-card__title mdl-card--expand">
-              <h2 class="mdl-card__title-text">网络设置</h2>
-            </div>
-            <div class="mdl-card__supporting-text" style="overflow: unset;">
+          <div class="mdl-card__supporting-text" style="overflow: unset;">
             <form action="#">
-              <div id="div_wifi_sel" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+              <div id="div_wifi_sel"
+                class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
                 <input id="wifi_sel" type="text" value="" class="mdl-textfield__input" readonly>
                 <input type="hidden" value="" name="wifi_sel">
-                <i class="mdl-icon-toggle__label material-icons"><svg><use xlink:href="#icon-keyboard_arrow_down" /></svg></i>
+                <i class="mdl-icon-toggle__label material-icons"><svg>
+                    <use xlink:href="#icon-keyboard_arrow_down" />
+                  </svg></i>
                 <label for="wifi_sel" class="mdl-textfield__label">SSID</label>
                 <ul id="ssid_sel_list" for="wifi_sel" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                 </ul>
@@ -235,19 +292,20 @@
                 </label>
               </div>
             </form>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-              <a id="wifi_submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                提交
-              </a>
-            </div>
           </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a id="wifi_submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              提交
+            </a>
+          </div>
+        </div>
 
-          <div class="page page2 mdl-cell mdl-cell--5-col demo-card-square mdl-card mdl-shadow--2dp" style="z-index: unset;">
-            <div class="mdl-card__title mdl-card--expand">
-              <h2 class="mdl-card__title-text">MQTT 设置</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
+        <div class="page page2 mdl-cell mdl-cell--5-col demo-card-square mdl-card mdl-shadow--2dp"
+          style="z-index: unset;">
+          <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">MQTT 设置</h2>
+          </div>
+          <div class="mdl-card__supporting-text">
             <form action="#">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="mqtt_addr">
@@ -266,24 +324,25 @@
                 <label class="mdl-textfield__label" for="mqtt_pwd">密码</label>
               </div>
             </form>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-              <a id="mqtt_submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                提交
-              </a>
-            </div>
           </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a id="mqtt_submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              提交
+            </a>
+          </div>
+        </div>
 
-          <div class="page page3 mdl-cell mdl-cell--5-col demo-card-event mdl-card mdl-shadow--2dp">
-            <table id="timed_task_tb" class="mdl-data-table mdl-js-data-table">
-              <tr>
-                <th>时间</th>
-                <th>插座</th>
-                <th>开关</th>
-                <th>循环</th>
-                <th>操作</th>
-              </tr>
-              <tr>
+        <div class="page page3 mdl-cell mdl-cell--12-col demo-card-event mdl-card mdl-shadow--2dp">
+          <table id="timed_task_tb" class="mdl-data-table task-table mdl-js-data-table">
+            <tr>
+              <th>ID</th>
+              <th>时间</th>
+              <th>插座</th>
+              <th>开关</th>
+              <th>循环</th>
+              <th>操作</th>
+            </tr>
+            <!-- <tr>
                 <td>02-15 07:11</td>
                 <td>1</td>
                 <td>0</td>
@@ -296,710 +355,799 @@
                 <td>0</td>
                 <td>6</td>
                 <td><a>删除</a></td>
-              </tr>
-            </table>
-          </div>
+              </tr> -->
+          </table>
+        </div>
 
-          <div class="page page3 over-unset mdl-cell mdl-cell--5-col demo-card-square mdl-card mdl-shadow--2dp" style="z-index: unset;">
-            <div class="mdl-card__title mdl-card--expand">
-              <h2 class="mdl-card__title-text">添加任务</h2>
-            </div>
-            <div class="over-unset mdl-card__supporting-text">
-              <form action="#">
-                <div class="mdl-textfield mdl-js-textfield getmdl-select">
-                  <input type="text" id="task_weekday" value="" class="mdl-textfield__input" readonly>
-                  <input type="hidden" value="0" name="task_weekday">
-                  <i class="mdl-icon-toggle__label material-icons"><svg><use xlink:href="#icon-keyboard_arrow_down" /></svg></i>
-                  <label for="task_weekday" class="mdl-textfield__label">是否循环</label>
-                  <ul for="task_weekday" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                      <li class="mdl-menu__item" data-val="0" data-selected='true'>无循环</li>
-                      <li class="mdl-menu__item" data-val="8">每天</li>
-                      <li class="mdl-menu__item" data-val="1">星期一</li>
-                      <li class="mdl-menu__item" data-val="2">星期二</li>
-                      <li class="mdl-menu__item" data-val="3">星期三</li>
-                      <li class="mdl-menu__item" data-val="4">星期四</li>
-                      <li class="mdl-menu__item" data-val="5">星期五</li>
-                      <li class="mdl-menu__item" data-val="6">星期六</li>
-                      <li class="mdl-menu__item" data-val="7">星期日</li>
-                  </ul>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield getmdl-select">
-                  <input type="text" value="" class="mdl-textfield__input" readonly>
-                  <input type="hidden" value="" id="task_skt_idx" name="task_skt_idx">
-                  <i class="mdl-icon-toggle__label material-icons"><svg><use xlink:href="#icon-keyboard_arrow_down" /></svg></i>
-                  <label for="task_skt_idx" class="mdl-textfield__label">插座</label>
-                  <ul for="task_skt_idx" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                      <li class="mdl-menu__item" data-val="1" data-selected='true'>插座-1</li>
-                      <li class="mdl-menu__item" data-val="2">插座-2</li>
-                      <li class="mdl-menu__item" data-val="3">插座-3</li>
-                      <li class="mdl-menu__item" data-val="4">插座-4</li>
-                      <li class="mdl-menu__item" data-val="5">插座-5</li>
-                      <li class="mdl-menu__item" data-val="6">插座-6</li>
-                  </ul>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                  <input class="mdl-textfield__input" type="date" id="task_date">
-                  <label class="mdl-textfield__label" for="sample1"></label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                  <input class="mdl-textfield__input" type="time" step="1" id="task_time">
-                  <label class="mdl-textfield__label" for="sample1"></label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                  <span>开关: </span>
-                  <span class="on-off mdl-list__item-secondary-action">
-                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="task_on">
-                      <input type="checkbox" id="task_on" class="mdl-switch__input" checked />
-                    </label>
-                  </span>
+        <div class="page page3 over-unset mdl-cell mdl-cell--12-col demo-card-square mdl-card mdl-shadow--2dp"
+          style="z-index: unset;">
+          <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">添加任务</h2>
+          </div>
+          <div class="over-unset mdl-card__supporting-text">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield getmdl-select">
+                <input type="text" id="task_weekday" value="" class="mdl-textfield__input" readonly>
+                <input type="hidden" value="0" name="task_weekday">
+                <i class="mdl-icon-toggle__label material-icons"><svg>
+                    <use xlink:href="#icon-keyboard_arrow_down" />
+                  </svg></i>
+                <label for="task_weekday" class="mdl-textfield__label">是否循环</label>
+                <ul for="task_weekday" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                  <li class="mdl-menu__item" data-val="0" data-selected='true'>无循环</li>
+                  <li class="mdl-menu__item" data-val="8">每天</li>
+                  <li class="mdl-menu__item" data-val="1">星期一</li>
+                  <li class="mdl-menu__item" data-val="2">星期二</li>
+                  <li class="mdl-menu__item" data-val="3">星期三</li>
+                  <li class="mdl-menu__item" data-val="4">星期四</li>
+                  <li class="mdl-menu__item" data-val="5">星期五</li>
+                  <li class="mdl-menu__item" data-val="6">星期六</li>
+                  <li class="mdl-menu__item" data-val="7">星期日</li>
+                </ul>
               </div>
-              </form>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-              <a href="javascript:AddTimedTask();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                提交
-              </a>
-            </div>
+              <div class="mdl-textfield mdl-js-textfield getmdl-select">
+                <input type="text" value="" class="mdl-textfield__input" readonly>
+                <input type="hidden" value="" id="task_skt_idx" name="task_skt_idx">
+                <i class="mdl-icon-toggle__label material-icons"><svg>
+                    <use xlink:href="#icon-keyboard_arrow_down" />
+                  </svg></i>
+                <label for="task_skt_idx" class="mdl-textfield__label">插座</label>
+                <ul for="task_skt_idx" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                  <li class="mdl-menu__item" data-val="1" data-selected='true'>1:<span id="add-tasklist-socket-name-1"></span></li>
+                  <li class="mdl-menu__item" data-val="2">2:<span id="add-tasklist-socket-name-2"></span></li>
+                  <li class="mdl-menu__item" data-val="3">3:<span id="add-tasklist-socket-name-3"></span></li>
+                  <li class="mdl-menu__item" data-val="4">4:<span id="add-tasklist-socket-name-4"></span></li>
+                  <li class="mdl-menu__item" data-val="5">5:<span id="add-tasklist-socket-name-5"></span></li>
+                  <li class="mdl-menu__item" data-val="6">6:<span id="add-tasklist-socket-name-6"></span></li>
+                </ul>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="date" id="task_date">
+                <label class="mdl-textfield__label" for="sample1"></label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="time" step="1" id="task_time">
+                <label class="mdl-textfield__label" for="sample1"></label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <span>开关: </span>
+                <span class="on-off mdl-list__item-secondary-action">
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="task_on">
+                    <input type="checkbox" id="task_on" class="mdl-switch__input" checked />
+                  </label>
+                </span>
+              </div>
+            </form>
           </div>
-
-
-          <div class="page page4 mdl-cell mdl-cell--12-col demo-card-event mdl-card mdl-shadow--2dp">
-            <table class="mdl-data-table mdl-js-data-table">
-              <tr>
-                <th>版本</th>
-                <th id="info_version">v1.0.33</th>
-              </tr>
-              <tr>
-                <td>IP</td>
-                <td id="info_ip">192.168.33.222</td>
-              </tr>
-              <tr>
-                <td>子网掩码</td>
-                <td id="info_mask">255.255.255.0</td>
-              </tr>
-              <tr>
-                <td>网关</td>
-                <td id="info_gateway">192.168.33.1</td>
-              </tr>
-              <tr>
-                <td>启动时间</td>
-                <td id="uptime">10:13:43</td>
-              </tr>
-            </table>
-            <div class="mdl-card__actions mdl-card--border">
-              <div class="mdl-layout-spacer"></div>
-              <i class="material-icons"><svg><use xlink:href="#icon-event" /></svg></i>
-              <!-- <span>2020-02-22</span> -->
-              <a class="mdl-button" id="st-date">2020-02-22</a>
-            </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a href="javascript:AddTimedTask();"
+              class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              提交
+            </a>
           </div>
+        </div>
 
-          <div class="page page5 mdl-cell mdl-cell--12-col demo-card-square mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title mdl-card--expand">
-              <h2 class="mdl-card__title-text">在线升级</h2>
-            </div>
-            <div class="mdl-card__supporting-text">
+
+        <div class="page page4 mdl-cell mdl-cell--12-col demo-card-event mdl-card mdl-shadow--2dp">
+          <table class="mdl-data-table mdl-js-data-table">
+            <tr>
+              <th>版本</th>
+              <th id="info_version">-</th>
+            </tr>
+            <tr>
+              <td>IP</td>
+              <td id="info_ip">-</td>
+            </tr>
+            <tr>
+              <td>子网掩码</td>
+              <td id="info_mask">-</td>
+            </tr>
+            <tr>
+              <td>网关</td>
+              <td id="info_gateway">-</td>
+            </tr>
+            <tr>
+              <td>启动时间</td>
+              <td id="uptime">-</td>
+            </tr>
+          </table>
+          <div class="mdl-card__actions mdl-card--border">
+            <div class="mdl-layout-spacer"></div>
+            <i class="material-icons"><svg>
+                <use xlink:href="#icon-event" />
+              </svg></i>
+            <!-- <span>2020-02-22</span> -->
+            <a class="mdl-button" id="st-date">2020-02-22</a>
+          </div>
+        </div>
+
+        <div class="page page5 mdl-cell mdl-cell--12-col demo-card-square mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">在线升级</h2>
+          </div>
+          <div class="mdl-card__supporting-text">
             <form action="#">
               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="ota_url" value="http://yuntong.icu/ztc1/tc1-v2.1.5-ota.bin">
+                <input class="mdl-textfield__input" type="text" id="ota_url"
+                  value="http://10.1.1.11:5244/d/volumes/mc1t/TC1%40MK3031%40moc.ota.bin">
                 <label class="mdl-textfield__label" for="ota_url">OTA 地址</label>
               </div>
             </form>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-              <a href="javascript:OtaStart();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                提交
-              </a>
-            </div>
-            <div id="ota_status" class="mdl-progress mdl-js-progress"></div>
           </div>
-
-          <div class="page page6 mdl-cell mdl-cell--12-col demo-card-square mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title mdl-card--expand">
-              <h2 class="mdl-card__title-text">系统日志</h2>
-            </div>
-            <div class="sys-log mdl-card__supporting-text">
-              <pre id="sys_log"></pre>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-              <a href="javascript:GetSysLog();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                刷新
-              </a>
-            </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a href="javascript:OtaStart();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              提交
+            </a>
           </div>
-
-          <div class="page page7 mdl-cell mdl-cell--12-col demo-card-square mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title mdl-card--expand">
-              <h2 class="mdl-card__title-text">关于</h2>
-            </div>
-            <div class="sys-log mdl-card__supporting-text">
-              <p>
-                <a href="https://github.com/zogodo/zTC1" target="_blank">github/zogodo/zTC1</a>
-              </p>
-              <p><a href="https://github.com/a2633063/zTC1" target="_blank">github/a2633063/zTC1</a>
-                <br>受该项目启发而写, 但基本未保留原项目代码.</p>
-              <p>
-                <a href="https://github.com/MXCHIP/mico-os" target="_blank">mico-os</a>
-              </p>
-              <p>
-                <a href="https://getmdl.io/index.html" target="_blank">Material Design Lite</a>
-              </p>
-              <p>
-                <a href="https://jquery.com/" target="_blank">jQuery</a>
-              </p>
-              <p>
-                <a href="https://gionkunz.github.io/chartist-js/index.html" target="_blank">Chartist</a>
-              </p>
-              <p>
-                <a href="https://creativeit.github.io/getmdl-select/" target="_blank">getmdl-select</a>
-              </p>
-              <p>
-                <a href="https://material.io/resources/icons/" target="_blank">Material Icons</a>
-              </p>
-              <p>
-                <a href="https://fonts.google.com/specimen/Roboto" target="_blank">Roboto</a>
-              </p>
-            </div>
-          </div>
-
+          <div id="ota_status" class="mdl-progress mdl-js-progress"></div>
         </div>
-      </main>
-    </div>
 
-    <!-- <button id="demo-show-toast" class="mdl-button mdl-js-button mdl-button--raised" type="button">Show Toast</button> -->
-    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
-      <div class="mdl-snackbar__text"></div>
-      <button class="mdl-snackbar__action" type="button"></button>
-    </div>
+        <div class="page page6 mdl-cell mdl-cell--12-col demo-card-square mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">系统日志</h2>
+          </div>
+          <div class="sys-log mdl-card__supporting-text">
+            <pre id="sys_log"></pre>
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a href="javascript:GetSysLog();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              刷新
+            </a>
+          </div>
+        </div>
 
-<svg>
-  <defs>
-    <g id="icon-access_alarm">
-      <path d="M0 0h24v24H0z" fill="none"/>
-      <path d="M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-    </g>
-    <g id="icon-add">
-      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
-    </g>
-    <g id="icon-arrow_drop_down">
-      <path d="M7 10l5 5 5-5z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
-    </g>
-    <g id="icon-cloud_download">
-      <path d="M0 0h24v24H0z" fill="none"/>
-      <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
-    </g>
-    <g id="icon-event">
-      <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
-    </g>
-    <g id="icon-help">
-      <path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
-    </g>
-    <g id="icon-home">
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
-    </g>
-    <g id="icon-info">
-      <path d="M0 0h24v24H0z" fill="none"/>
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-    </g>
-    <g id="icon-keyboard_arrow_down">
-      <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-      <path d="M0 0h24v24H0V0z" fill="none"/>
-    </g>
-    <g id="icon-menu">
-      <path d="M0 0h24v24H0z" fill="none"/>
-      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-    </g>
-    <g id="icon-more_vert">
-      <path d="M0 0h24v24H0z" fill="none"/>
-      <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-    </g>
-    <g id="icon-notes">
-      <path d="M3 18h12v-2H3v2zM3 6v2h18V6H3zm0 7h18v-2H3v2z"/>
-      <path d="M0 0h24v24H0V0z" fill="none"/>
-    </g>
-    <g id="icon-search">
-      <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
-    </g>
-    <g id="icon-settings">
-      <path d="M0,0h24v24H0V0z" fill="none"/>
-      <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
-    </g>
-    <g id="img-user">
-      <g id="#45d0e3ff">
-      <path fill="#45d0e3" opacity="1.00" d=" M 53.37 0.00 L 58.72 0.00 C 75.08 0.90 90.91 9.14 100.69 22.33 C 107.50 31.24 111.31 42.21 112.00 53.37 L 112.00 58.70 C 111.04 78.61 98.79 97.47 80.82 106.17 C 79.54 103.27 78.19 100.38 77.13 97.38 C 75.96 93.10 74.50 88.08 76.95 83.97 C 78.90 80.30 84.37 81.15 86.26 77.47 C 87.78 74.72 88.75 71.72 89.88 68.80 C 86.87 67.57 83.95 65.94 82.84 62.67 C 85.41 62.55 87.97 62.56 90.54 62.54 C 90.73 60.46 90.80 58.37 90.97 56.28 C 92.50 56.26 94.04 56.25 95.57 56.24 C 94.14 51.38 93.20 46.39 92.61 41.36 C 91.85 37.14 91.80 32.46 89.06 28.93 C 85.66 24.42 80.36 21.79 75.00 20.42 C 66.49 18.22 57.44 19.54 49.32 22.59 C 48.22 21.70 47.13 20.79 46.00 19.93 C 45.67 19.83 45.02 19.63 44.70 19.53 C 38.54 17.36 31.82 18.95 26.65 22.71 C 21.75 25.72 19.50 31.39 18.56 36.82 C 16.07 51.25 18.52 66.10 15.49 80.46 C 14.80 83.83 13.17 86.89 11.40 89.80 C 4.55 80.87 0.71 69.87 0.00 58.67 L 0.00 53.27 C 0.72 42.15 4.52 31.22 11.31 22.34 C 21.10 9.12 36.98 0.86 53.37 0.00 Z" />
-      <path fill="#45d0e3" opacity="1.00" d=" M 46.81 58.85 C 48.67 60.66 50.63 62.36 52.52 64.14 C 53.51 65.97 54.72 67.81 54.84 69.95 C 55.32 75.99 54.64 82.26 51.85 87.72 C 47.89 95.43 41.52 101.46 36.56 108.49 C 29.02 105.67 22.14 101.21 16.39 95.59 C 21.92 95.26 27.23 93.08 31.33 89.33 C 40.12 81.50 43.93 69.90 46.81 58.85 Z" />
+        <div class="page page7 mdl-cell mdl-cell--12-col demo-card-square mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">关于</h2>
+          </div>
+          <div class="sys-log mdl-card__supporting-text">
+            <p>
+              <a href="https://github.com/zogodo/zTC1" target="_blank">github/zogodo/zTC1</a>
+            </p>
+            <p><a href="https://github.com/a2633063/zTC1" target="_blank">github/a2633063/zTC1</a>
+              <br>受该项目启发而写, 但基本未保留原项目代码.
+            </p>
+            <p>
+              <a href="https://github.com/MXCHIP/mico-os" target="_blank">mico-os</a>
+            </p>
+            <p>
+              <a href="https://getmdl.io/index.html" target="_blank">Material Design Lite</a>
+            </p>
+            <p>
+              <a href="https://jquery.com/" target="_blank">jQuery</a>
+            </p>
+            <p>
+              <a href="https://gionkunz.github.io/chartist-js/index.html" target="_blank">Chartist</a>
+            </p>
+            <p>
+              <a href="https://creativeit.github.io/getmdl-select/" target="_blank">getmdl-select</a>
+            </p>
+            <p>
+              <a href="https://material.io/resources/icons/" target="_blank">Material Icons</a>
+            </p>
+            <p>
+              <a href="https://fonts.google.com/specimen/Roboto" target="_blank">Roboto</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- <button id="demo-show-toast" class="mdl-button mdl-js-button mdl-button--raised" type="button">Show Toast</button> -->
+  <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
+
+  <svg>
+    <defs>
+      <g id="icon-access_alarm">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM7.88 3.39L6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM12.5 8H11v6l4.75 2.85.75-1.23-4-2.37V8zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
       </g>
-      <g id="#3e3e3eff">
-      <path fill="#3e3e3e" opacity="1.00" d=" M 26.65 22.71 C 31.82 18.95 38.54 17.36 44.70 19.53 C 41.86 22.16 39.20 24.96 36.55 27.77 C 37.72 29.05 38.91 30.31 40.10 31.58 C 42.67 28.12 45.54 24.77 49.32 22.59 C 57.44 19.54 66.49 18.22 75.00 20.42 C 80.36 21.79 85.66 24.42 89.06 28.93 C 91.80 32.46 91.85 37.14 92.61 41.36 C 82.53 41.64 72.25 40.50 62.86 36.65 C 62.81 40.15 63.08 43.92 61.22 47.05 C 60.19 49.27 58.12 50.64 56.32 52.18 C 54.94 50.22 54.14 47.28 51.44 46.79 C 48.33 45.98 45.15 49.54 46.48 52.54 C 48.16 56.57 50.50 60.28 52.52 64.14 C 50.63 62.36 48.67 60.66 46.81 58.85 C 43.93 69.90 40.12 81.50 31.33 89.33 C 27.23 93.08 21.92 95.26 16.39 95.59 C 14.64 93.73 12.95 91.82 11.40 89.80 C 13.17 86.89 14.80 83.83 15.49 80.46 C 18.52 66.10 16.07 51.25 18.56 36.82 C 19.50 31.39 21.75 25.72 26.65 22.71 Z" />
-      <path fill="#3e3e3e" opacity="1.00" d=" M 83.41 50.49 C 84.92 48.75 86.28 50.47 85.90 52.21 C 84.56 52.87 82.99 52.19 83.41 50.49 Z" />
+      <g id="icon-add">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        <path d="M0 0h24v24H0z" fill="none" />
       </g>
-      <g id="#049d56ff">
-      <path fill="#049d56" opacity="1.00" d=" M 44.70 19.53 C 45.02 19.63 45.67 19.83 46.00 19.93 C 47.13 20.79 48.22 21.70 49.32 22.59 C 45.54 24.77 42.67 28.12 40.10 31.58 C 38.91 30.31 37.72 29.05 36.55 27.77 C 39.20 24.96 41.86 22.16 44.70 19.53 Z" />
+      <g id="icon-arrow_drop_down">
+        <path d="M7 10l5 5 5-5z" />
+        <path d="M0 0h24v24H0z" fill="none" />
       </g>
-      <g id="#ffe1afff">
-      <path fill="#ffe1af" opacity="1.00" d=" M 62.86 36.65 C 72.25 40.50 82.53 41.64 92.61 41.36 C 93.20 46.39 94.14 51.38 95.57 56.24 C 94.04 56.25 92.50 56.26 90.97 56.28 C 90.80 58.37 90.73 60.46 90.54 62.54 C 87.97 62.56 85.41 62.55 82.84 62.67 C 83.95 65.94 86.87 67.57 89.88 68.80 C 88.75 71.72 87.78 74.72 86.26 77.47 C 84.37 81.15 78.90 80.30 76.95 83.97 C 74.50 88.08 75.96 93.10 77.13 97.38 C 67.78 97.97 58.22 94.74 51.85 87.72 C 54.64 82.26 55.32 75.99 54.84 69.95 C 54.72 67.81 53.51 65.97 52.52 64.14 C 50.50 60.28 48.16 56.57 46.48 52.54 C 45.15 49.54 48.33 45.98 51.44 46.79 C 54.14 47.28 54.94 50.22 56.32 52.18 C 58.12 50.64 60.19 49.27 61.22 47.05 C 63.08 43.92 62.81 40.15 62.86 36.65 M 83.41 50.49 C 82.99 52.19 84.56 52.87 85.90 52.21 C 86.28 50.47 84.92 48.75 83.41 50.49 Z" />
+      <g id="icon-cloud_download">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z" />
       </g>
-      <g id="#fe5606ff">
-      <path fill="#fe5606" opacity="1.00" d=" M 36.56 108.49 C 41.52 101.46 47.89 95.43 51.85 87.72 C 58.22 94.74 67.78 97.97 77.13 97.38 C 78.19 100.38 79.54 103.27 80.82 106.17 C 73.65 109.79 65.69 111.59 57.70 112.00 L 54.26 112.00 C 48.24 111.64 42.22 110.63 36.56 108.49 Z" />
+      <g id="icon-event">
+        <path
+          d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
+        <path d="M0 0h24v24H0z" fill="none" />
       </g>
-    </g>
-  </defs>
-</svg>
+      <g id="icon-help">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+      </g>
+      <g id="icon-home">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </g>
+      <g id="icon-info">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+      </g>
+      <g id="icon-keyboard_arrow_down">
+        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+        <path d="M0 0h24v24H0V0z" fill="none" />
+      </g>
+      <g id="icon-menu">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+      </g>
+      <g id="icon-more_vert">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+      </g>
+      <g id="icon-notes">
+        <path d="M3 18h12v-2H3v2zM3 6v2h18V6H3zm0 7h18v-2H3v2z" />
+        <path d="M0 0h24v24H0V0z" fill="none" />
+      </g>
+      <g id="icon-search">
+        <path
+          d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </g>
+      <g id="icon-settings">
+        <path d="M0,0h24v24H0V0z" fill="none" />
+        <path
+          d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z" />
+      </g>
+      <g id="img-user">
+        <g id="#45d0e3ff">
+          <path fill="#45d0e3" opacity="1.00"
+            d=" M 53.37 0.00 L 58.72 0.00 C 75.08 0.90 90.91 9.14 100.69 22.33 C 107.50 31.24 111.31 42.21 112.00 53.37 L 112.00 58.70 C 111.04 78.61 98.79 97.47 80.82 106.17 C 79.54 103.27 78.19 100.38 77.13 97.38 C 75.96 93.10 74.50 88.08 76.95 83.97 C 78.90 80.30 84.37 81.15 86.26 77.47 C 87.78 74.72 88.75 71.72 89.88 68.80 C 86.87 67.57 83.95 65.94 82.84 62.67 C 85.41 62.55 87.97 62.56 90.54 62.54 C 90.73 60.46 90.80 58.37 90.97 56.28 C 92.50 56.26 94.04 56.25 95.57 56.24 C 94.14 51.38 93.20 46.39 92.61 41.36 C 91.85 37.14 91.80 32.46 89.06 28.93 C 85.66 24.42 80.36 21.79 75.00 20.42 C 66.49 18.22 57.44 19.54 49.32 22.59 C 48.22 21.70 47.13 20.79 46.00 19.93 C 45.67 19.83 45.02 19.63 44.70 19.53 C 38.54 17.36 31.82 18.95 26.65 22.71 C 21.75 25.72 19.50 31.39 18.56 36.82 C 16.07 51.25 18.52 66.10 15.49 80.46 C 14.80 83.83 13.17 86.89 11.40 89.80 C 4.55 80.87 0.71 69.87 0.00 58.67 L 0.00 53.27 C 0.72 42.15 4.52 31.22 11.31 22.34 C 21.10 9.12 36.98 0.86 53.37 0.00 Z" />
+          <path fill="#45d0e3" opacity="1.00"
+            d=" M 46.81 58.85 C 48.67 60.66 50.63 62.36 52.52 64.14 C 53.51 65.97 54.72 67.81 54.84 69.95 C 55.32 75.99 54.64 82.26 51.85 87.72 C 47.89 95.43 41.52 101.46 36.56 108.49 C 29.02 105.67 22.14 101.21 16.39 95.59 C 21.92 95.26 27.23 93.08 31.33 89.33 C 40.12 81.50 43.93 69.90 46.81 58.85 Z" />
+        </g>
+        <g id="#3e3e3eff">
+          <path fill="#3e3e3e" opacity="1.00"
+            d=" M 26.65 22.71 C 31.82 18.95 38.54 17.36 44.70 19.53 C 41.86 22.16 39.20 24.96 36.55 27.77 C 37.72 29.05 38.91 30.31 40.10 31.58 C 42.67 28.12 45.54 24.77 49.32 22.59 C 57.44 19.54 66.49 18.22 75.00 20.42 C 80.36 21.79 85.66 24.42 89.06 28.93 C 91.80 32.46 91.85 37.14 92.61 41.36 C 82.53 41.64 72.25 40.50 62.86 36.65 C 62.81 40.15 63.08 43.92 61.22 47.05 C 60.19 49.27 58.12 50.64 56.32 52.18 C 54.94 50.22 54.14 47.28 51.44 46.79 C 48.33 45.98 45.15 49.54 46.48 52.54 C 48.16 56.57 50.50 60.28 52.52 64.14 C 50.63 62.36 48.67 60.66 46.81 58.85 C 43.93 69.90 40.12 81.50 31.33 89.33 C 27.23 93.08 21.92 95.26 16.39 95.59 C 14.64 93.73 12.95 91.82 11.40 89.80 C 13.17 86.89 14.80 83.83 15.49 80.46 C 18.52 66.10 16.07 51.25 18.56 36.82 C 19.50 31.39 21.75 25.72 26.65 22.71 Z" />
+          <path fill="#3e3e3e" opacity="1.00"
+            d=" M 83.41 50.49 C 84.92 48.75 86.28 50.47 85.90 52.21 C 84.56 52.87 82.99 52.19 83.41 50.49 Z" />
+        </g>
+        <g id="#049d56ff">
+          <path fill="#049d56" opacity="1.00"
+            d=" M 44.70 19.53 C 45.02 19.63 45.67 19.83 46.00 19.93 C 47.13 20.79 48.22 21.70 49.32 22.59 C 45.54 24.77 42.67 28.12 40.10 31.58 C 38.91 30.31 37.72 29.05 36.55 27.77 C 39.20 24.96 41.86 22.16 44.70 19.53 Z" />
+        </g>
+        <g id="#ffe1afff">
+          <path fill="#ffe1af" opacity="1.00"
+            d=" M 62.86 36.65 C 72.25 40.50 82.53 41.64 92.61 41.36 C 93.20 46.39 94.14 51.38 95.57 56.24 C 94.04 56.25 92.50 56.26 90.97 56.28 C 90.80 58.37 90.73 60.46 90.54 62.54 C 87.97 62.56 85.41 62.55 82.84 62.67 C 83.95 65.94 86.87 67.57 89.88 68.80 C 88.75 71.72 87.78 74.72 86.26 77.47 C 84.37 81.15 78.90 80.30 76.95 83.97 C 74.50 88.08 75.96 93.10 77.13 97.38 C 67.78 97.97 58.22 94.74 51.85 87.72 C 54.64 82.26 55.32 75.99 54.84 69.95 C 54.72 67.81 53.51 65.97 52.52 64.14 C 50.50 60.28 48.16 56.57 46.48 52.54 C 45.15 49.54 48.33 45.98 51.44 46.79 C 54.14 47.28 54.94 50.22 56.32 52.18 C 58.12 50.64 60.19 49.27 61.22 47.05 C 63.08 43.92 62.81 40.15 62.86 36.65 M 83.41 50.49 C 82.99 52.19 84.56 52.87 85.90 52.21 C 86.28 50.47 84.92 48.75 83.41 50.49 Z" />
+        </g>
+        <g id="#fe5606ff">
+          <path fill="#fe5606" opacity="1.00"
+            d=" M 36.56 108.49 C 41.52 101.46 47.89 95.43 51.85 87.72 C 58.22 94.74 67.78 97.97 77.13 97.38 C 78.19 100.38 79.54 103.27 80.82 106.17 C 73.65 109.79 65.69 111.59 57.70 112.00 L 54.26 112.00 C 48.24 111.64 42.22 110.63 36.56 108.49 Z" />
+        </g>
+      </g>
+    </defs>
+  </svg>
 
-<script>
-var icon_menu = "<svg><path d='M0 0h24v24H0z' fill='none'/><path d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/></svg>";
-</script>
-<script type="text/javascript" src="assets/js_pack.js"></script>
-<script>
-//语言
-var LangConfig = {
-  //菜单
-  Home: {en: "Home", cn: "主页"},
-  Config: {en: "Config", cn: "设置"},
-  TimedTask: {en: "Timed Task", cn: "定时任务"},
-  SystemStatus: {en: "System Status", cn: "系统状态"},
-  OTA: {en: "OTA", cn: "在线升级"},
-  SystemLog: {en: "System Log", cn: "系统日志"},
-  About: {en: "About", cn: "关于"},
-  //主页
-  Socket: {en: "Socket", cn: "插座"},
-}
-function ChangeLanguage(lang) {
-  if (lang == "jp") {
-    ShowToast("申し訳ありませんが、日本語はありません。");
-    return;
-  }
-  $(".lang").each(function() {
-    var key = $(this).attr("langKey");
-    var val = LangConfig[key][lang];
-    $(this).html(val);
-  });
-}
-//弹框-start
-var snackbarContainer = document.querySelector('#demo-toast-example');
-function ShowToast(mess) {
-  var data = {message: mess};
-  snackbarContainer.MaterialSnackbar.showSnackbar(data);
-}
-//弹框-end
-$(document).ready(function() {
-  componentHandler.upgradeAllRegistered();
-  //Material加载完成
-});
-
-//Ajax-start
-function AjaxErr(re) {
-  ShowToast("Ajax err: " + re.status);
-}
-function Ajax(url, onsuccess, type, data) {
-  $.ajax({
-    url: url,
-    type: type,
-    data: data,
-    success: function(re) {
-      onsuccess(re.replace(/'/g, '"'));
-    },
-    error: AjaxErr
-  });
-}
-function HttpGet(url, onsuccess) {
-  Ajax(url, onsuccess, "GET", null);
-}
-function HttpPost(url, onsuccess, data) {
-  Ajax(url, onsuccess, "POST", data);
-}
-function HttpDel(url, onsuccess, data) {
-  Ajax(url, onsuccess, "DELETE", data);
-}
-//Ajax-end
-
-//DateTool-start
-// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
-// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
-Date.prototype.Format = function(fmt) {
-  var o = {
-    "M+" : this.getMonth()+1,                 //月份
-    "d+" : this.getDate(),                    //日
-    "h+" : this.getHours(),                   //小时
-    "m+" : this.getMinutes(),                 //分
-    "s+" : this.getSeconds(),                 //秒
-    "q+" : Math.floor((this.getMonth()+3)/3), //季度
-    "S"  : this.getMilliseconds()             //毫秒
-  };
-  if(/(y+)/.test(fmt))
-    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-  for(var k in o)
-    if(new RegExp("("+ k +")").test(fmt))
-  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-  return fmt;
-}
-//DateTool-end
-
-var info_station_name;
-var info_wifi_password;
-var mqtt_addr;
-var mqtt_port;
-var mqtt_usr;
-var mqtt_pwd;
-
-HttpGet("/status", function (re) {
-  var status = JSON.parse(re);
-  var status_arr = status.sockets.split(",");
-  for (var i = 0; i < status_arr.length; i++) {
-      //checkboxs[i].checked = status_arr[i] == "1";
-      if (status_arr[i] == "1") {
-        switch_lables[i].MaterialSwitch.on();
-      } else {
-        switch_lables[i].MaterialSwitch.off();
+  <script>
+    var icon_menu = "<svg><path d='M0 0h24v24H0z' fill='none'/><path d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/></svg>";
+  </script>
+  <script type="text/javascript" src="assets/js_pack.js"></script>
+  <script>
+    //语言
+    var LangConfig = {
+      //菜单
+      Home: { en: "Home", cn: "主页" },
+      Config: { en: "Config", cn: "设置" },
+      TimedTask: { en: "Timed Task", cn: "定时任务" },
+      SystemStatus: { en: "System Status", cn: "系统状态" },
+      OTA: { en: "OTA", cn: "在线升级" },
+      SystemLog: { en: "System Log", cn: "系统日志" },
+      About: { en: "About", cn: "关于" },
+      //主页
+      Socket: { en: "Socket", cn: "插座" },
+    }
+    var is_stop_power = false;
+    function ChangeLanguage(lang) {
+      if (lang == "jp") {
+        ShowToast("申し訳ありませんが、日本語はありません。");
+        return;
       }
+      $(".lang").each(function () {
+        var key = $(this).attr("langKey");
+        var val = LangConfig[key][lang];
+        $(this).html(val);
+      });
+    }
+    //localStorage
+    let socketName = localStorage.getItem('socketName');
+    if (socketName == null) {
+      socketName = { "1": "Socket1", "2": "Socket2", "3": "Socket3", "4": "Socket4", "5": "Socket5", "6": "Socket6" };
+      socketName = JSON.stringify(socketName);
+      localStorage.setItem('socketName', socketName);
+    }
+    socketName = JSON.parse(socketName || "")
+
+    function SetsocketName(idx, nickname) {
+      socketName[idx] = nickname;
+      localStorage.setItem('socketName', JSON.stringify(socketName));
+      $("#add-tasklist-socket-name-" + idx).html(nickname);
+    }
+    for (let i = 1; i <= 6; i++) {
+      $("#socket-name-" + i).val(socketName[i]);
+      $("#socket-name-" + i).on('input', function (event) {
+        const value = event.target.value;
+        SetsocketName(i, value);
+      });
+      $("#add-tasklist-socket-name-" + i).html(socketName[i]);
     }
 
-  if(status.mode == 1) {
-    $("#custom_station").click();
-    info_station_name = status.station_ssid;
-    info_wifi_password = status.station_pwd;
-  } else {
-    $("#custom_ap").click();
-    $("#custom_ssid")[0].parentElement.MaterialTextfield.change(status.ap_ssid);
-    info_wifi_password = status.ap_pwd;
-  }
-
-  mqtt_addr = status.mqtt_addr;
-  mqtt_port = status.mqtt_port;
-  mqtt_usr = status.mqtt_usr;
-  mqtt_pwd = status.mqtt_pwd;
-  $("#info_version").html(status.version);
-  $("#info_ip").html(status.ip);
-  $("#info_mask").html(status.mask);
-  $("#info_gateway").html(status.gateway);
-  $("#uptime").html(status.up_time);
-});
-$("#st-date").html((new Date()).Format("yyyy-MM-dd"));
-
-//Menu-start
-var chart_par = document.getElementById("ct-chart-par");
-chart_par.scrollTo(chart_par.scrollWidth, 0);
-
-var ssid_slt = document.getElementById("ssid_sel_list");
-
-var rescan_timer;
-
-function ShowPage(id) {
-  $(".page").hide();
-  $(".page"+id).show();
-  $(".is-small-screen >> .mdl-layout__drawer-button").click()
-
-  chart_par.scrollTo(chart_par.scrollWidth, 0);
-
-  $(".mdl-navigation__link").removeClass("mdl-nav-active");
-  $(".mdl-navigation__link:eq("+(id-1)+")").addClass("mdl-nav-active");
-
-  if(id == 2) {
-    Rescan();
-    $("#custom_password")[0].parentElement.MaterialTextfield.change(info_wifi_password);
-    $("#mqtt_addr")[0].parentElement.MaterialTextfield.change(mqtt_addr);
-    $("#mqtt_port")[0].parentElement.MaterialTextfield.change(mqtt_port);
-    $("#mqtt_usr")[0].parentElement.MaterialTextfield.change(mqtt_usr);
-    $("#mqtt_pwd")[0].parentElement.MaterialTextfield.change(mqtt_pwd);
-  } else {
-    window.clearTimeout(rescan_timer);
-  }
-}
-ShowPage(1);
-//Menu-end
-
-//Socket-start
-var socket_ul = document.getElementById("socket_ul");
-var checkboxs = socket_ul.getElementsByClassName("mdl-switch__input");
-var switch_lables = socket_ul.getElementsByClassName("mdl-switch");
-$(".mdl-switch__input").on("click", function() {
-  var sockets_st = "";
-  for (var i = 0; i < checkboxs.length; i++) {
-    sockets_st += (checkboxs[i].checked ? "1," : "0,");
-  }
-  HttpPost("/socket", function (re) {
-  }, sockets_st);
-});
-//Socket-end
-
-//Config-start
-$("#wifi_sel").on("change", function() {
-  var div_custom = $("#div_custom_ssid")[0];
-  var wifi_sel_id = $("input[name='wifi_sel']")[0];
-  var wifi_sel_name = $("#wifi_sel")[0];
-  var custom_ssid = $("#custom_ssid")[0];
-  if (wifi_sel_id.value == "0") {
-    div_custom.hidden = false;
-    custom_ssid.parentElement.MaterialTextfield.change("");
-  } else {
-    div_custom.hidden = true;
-    custom_ssid.parentElement.MaterialTextfield.change(wifi_sel_name.value);
-  }
-});
-
-$("#custom_ap").on("change", function(){
-  $("#div_custom_ssid")[0].hidden = false;
-  $("#div_wifi_sel")[0].hidden = true;
-});
-$("#custom_station").on("change", function(){
-  $("#div_custom_ssid")[0].hidden = true;
-  $("#div_wifi_sel")[0].hidden = false;
-});
-
-function Rescan() {
-  HttpPost("/wifi/scan", function (re) {
-    if (re == "OK") {
-      window.setTimeout(GetScanResult, 1000);
-    } else {
-      ShowToast(re);
+    //弹框-start
+    var snackbarContainer = document.querySelector('#demo-toast-example');
+    function ShowToast(mess) {
+      var data = { message: mess };
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
     }
-  });
-}
+    //弹框-end
+    $(document).ready(function () {
+      componentHandler.upgradeAllRegistered();
+      //Material加载完成
+    });
 
-function GetScanResult() {
-  HttpGet("/wifi/scan", function (re) {
-    if (re != "NO") {
-      var wifi_sel_name = $("#wifi_sel").val();
-      if(!wifi_sel_name) {
-        wifi_sel_name = info_station_name;
-      }
-      var wifi_sel_id = $("input[name='wifi_sel']").val();
-      var ret = JSON.parse(re.replace(/'/g, '"')); //TODO: Fix this later
-      if(wifi_sel_id === "0") {
-        var html = "<li class='mdl-menu__item' data-val='0' data-selected='true'>Manual</li>";
-      } else {
-        var html = "<li class='mdl-menu__item' data-val='0'>Manual</li>";
-      }
-      for (var i = 0; i < ret.ssids.length; i++) {
-        if(wifi_sel_name == ret.ssids[i]) {
-          html += "<li class='mdl-menu__item' data-val='"+(i+1)+"' data-selected='true'>"+ret.ssids[i]+"</li>";
-        } else {
-          html += "<li class='mdl-menu__item' data-val='"+(i+1)+"'>"+ret.ssids[i]+"</li>";
+    //Ajax-start
+    function AjaxErr(re) {
+      ShowToast("Ajax err: " + re.status);
+    }
+    function Ajax(url, onsuccess, type, data) {
+      $.ajax({
+        url: url,
+        type: type,
+        data: data,
+        success: function (re) {
+          // console.log(re)
+          // if (re instanceof String )
+          onsuccess(re.replace(/'/g, '"'));
+        },
+        error: AjaxErr
+      });
+    }
+    function HttpGet(url, onsuccess) {
+      Ajax(url, onsuccess, "GET", null);
+    }
+    function HttpPost(url, onsuccess, data) {
+      Ajax(url, onsuccess, "POST", data);
+    }
+    function HttpDel(url, onsuccess, data) {
+      Ajax(url, onsuccess, "DELETE", data);
+    }
+    //Ajax-end
+
+    //DateTool-start
+    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+    // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+    Date.prototype.Format = function (fmt) {
+      var o = {
+        "M+": this.getMonth() + 1,                 //月份
+        "d+": this.getDate(),                    //日
+        "h+": this.getHours(),                   //小时
+        "m+": this.getMinutes(),                 //分
+        "s+": this.getSeconds(),                 //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds()             //毫秒
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+      return fmt;
+    }
+    //DateTool-end
+
+    var info_station_name;
+    var info_wifi_password;
+    var mqtt_addr;
+    var mqtt_port;
+    var mqtt_usr;
+    var mqtt_pwd;
+    function GetStatusInfo() {
+      HttpGet("/status", function (re) {
+        var status = JSON.parse(re);
+        var status_arr = status.sockets.split(",");
+        for (var i = 0; i < status_arr.length; i++) {
+          //checkboxs[i].checked = status_arr[i] == "1";
+          if (status_arr[i] == "1") {
+            switch_lables[i].MaterialSwitch.on();
+          } else {
+            switch_lables[i].MaterialSwitch.off();
+          }
         }
-      }
-      ssid_slt.innerHTML = html;
-      getmdlSelect.init(".getmdl-select");
-      rescan_timer = window.setTimeout(Rescan, 20000);
-      return;
+
+        if (status.mode == 1) {
+          $("#custom_station").click();
+          info_station_name = status.station_ssid;
+          info_wifi_password = status.station_pwd;
+        } else {
+          $("#custom_ap").click();
+          $("#custom_ssid")[0].parentElement.MaterialTextfield.change(status.ap_ssid);
+          info_wifi_password = status.ap_pwd;
+        }
+
+        mqtt_addr = status.mqtt_addr;
+        mqtt_port = status.mqtt_port;
+        mqtt_usr = status.mqtt_usr;
+        mqtt_pwd = status.mqtt_pwd;
+        $("#info_version").html(status.version);
+        $("#info_ip").html(status.ip);
+        $("#info_mask").html(status.mask);
+        $("#info_gateway").html(status.gateway);
+        $("#uptime").html(status.up_time);
+      });
+      $("#st-date").html((new Date()).Format("yyyy-MM-dd"));
     }
-    window.setTimeout(GetScanResult, 1000);
-  });
-}
 
-$("#mqtt_submit").on("click", function() {
-  var mqtt_addr = $("#mqtt_addr").val();
-  var mqtt_port = $("#mqtt_port").val();
-  var mqtt_usr = $("#mqtt_usr").val();
-  var mqtt_pwd = $("#mqtt_pwd").val();
-  var params = mqtt_addr + " " + mqtt_port + " " + mqtt_usr + " " + mqtt_pwd;
-  HttpPost("/mqtt/config", function (re) {
-    ShowToast(re);
-  }, params);
-});
+    //图表-start
+    var ct_data = { series: [[]] };
+    var ct_chart = new Chartist.Line('.ct-chart', ct_data, { showArea: true, axisY: { position: 'end' } });
+    var power_idx = 0;
+    var chart_wth = 0;
+    var p = document.getElementById("p");
+    var w = document.getElementById("w");
+    function GetPowerRecord() {
+      HttpPost("/power", function (re) {
+        re = re.replace(/'/g, '"');
+        var power = JSON.parse(re);
+        power_idx = power.idx + 1;
 
-//Quotation Marks
-function ContainQM(str) {
-  if (str == ""
-      || str.indexOf("'") >= 0
-      || str.indexOf('"') >= 0
-      || str.indexOf(' ') >= 0
-      || str.length > 32) {
-    return true;
-  }
-  return false;
-}
+        var x = chart_par.scrollWidth - chart_par.offsetWidth - chart_par.scrollLeft;
 
-var qm_mess = "Sorry, can't use ' or \" or space or empty.\n\nAlso, length <= 32."
-var le_mess = "Sorry, length < 8."
+        power.powers.forEach(element => {
+          var curr_p = element / 10;
+          p.innerHTML = curr_p.toFixed(2);
+          var len = ct_data.series[0].push(curr_p);
+          if (len > 1000) { //最多1000条数据
+            ct_data.series[0].shift();
+          }
+        });
+        chart_wth += power.powers.length;
+        $("#ct-chart").width(chart_wth * 10);
+        ct_chart.update(ct_data);
+        if (power.powers.length != 0 && x < 100) {
+          chart_par.scrollTo(chart_par.scrollWidth, 0);
+        }
+        // $("#uptime").html(power.up_time);
 
-$("#wifi_submit").on("click", function() {
-  var mode = $("#custom_station").prop("checked") ? 1 : 0;
-  var ssid = $("#custom_ssid").val();
-  var passwd = $("#custom_password").val();
-  if (ContainQM(ssid) || ContainQM(passwd)) {
-    alert(qm_mess);
-    return;
-  }
-  if (passwd.length < 8) {
-    alert(le_mess);
-    return;
-  }
-  var params = mode + " " + ssid + " " + passwd;
-  HttpPost("/wifi/config", function (re) {
-    ShowToast(re);
-  }, params);
-});
-//Config-end
+        var w_v = (17.1 * power.p_count) / 1000 / 36000;
+        w.innerHTML = w_v.toFixed(2);
 
-//图表-start
-var ct_data = { series: [ [] ] };
-var ct_chart = new Chartist.Line('.ct-chart', ct_data, {showArea: true, axisY: {position: 'end'}});
-var power_idx = 0;
-var chart_wth = 0;
-var p = document.getElementById("p");
-var w = document.getElementById("w");
-function GetPowerRecord() {
-  HttpPost("/power", function (re) {
-    re = re.replace(/'/g, '"');
-    var power = JSON.parse(re);
-    power_idx = power.idx + 1;
+        var status_arr = power.sockets.split(",");
+        for (var i = 0; i < status_arr.length; i++) {
+          //checkboxs[i].checked = status_arr[i] == "1";
+          if (status_arr[i] == "1") {
+            switch_lables[i].MaterialSwitch.on();
+          } else {
+            switch_lables[i].MaterialSwitch.off();
+          }
+        }
 
-    var x = chart_par.scrollWidth - chart_par.offsetWidth - chart_par.scrollLeft;
+        if (!is_stop_power) setTimeout(GetPowerRecord, 3000);
+      }, power_idx.toString());
+    }
+    $(document).ready(function () {
+      GetPowerRecord();
+    })
+    //图表-end
 
-    power.powers.forEach(element => {
-      var curr_p = element/10;
-      p.innerHTML = curr_p.toFixed(2);
-      var len = ct_data.series[0].push(curr_p);
-      if (len > 1000) { //最多1000条数据
-        ct_data.series[0].shift();
+    //Menu-start
+    var chart_par = document.getElementById("ct-chart-par");
+    chart_par.scrollTo(chart_par.scrollWidth, 0);
+
+    var ssid_slt = document.getElementById("ssid_sel_list");
+
+    var rescan_timer;
+
+    function ShowPage(id) {
+      $(".page").hide();
+      $(".page" + id).show();
+      $(".is-small-screen >> .mdl-layout__drawer-button").click()
+
+      chart_par.scrollTo(chart_par.scrollWidth, 0);
+
+      $(".mdl-navigation__link").removeClass("mdl-nav-active");
+      $(".mdl-navigation__link:eq(" + (id - 1) + ")").addClass("mdl-nav-active");
+
+      if (id != 1) {
+        is_stop_power = true;
+      } else {
+        is_stop_power = false;
+        GetPowerRecord();
+      }
+      console.log('stop power:', is_stop_power)
+      if (id == 2) {
+        Rescan();
+        $("#custom_password")[0].parentElement.MaterialTextfield.change(info_wifi_password);
+        $("#mqtt_addr")[0].parentElement.MaterialTextfield.change(mqtt_addr);
+        $("#mqtt_port")[0].parentElement.MaterialTextfield.change(mqtt_port);
+        $("#mqtt_usr")[0].parentElement.MaterialTextfield.change(mqtt_usr);
+        $("#mqtt_pwd")[0].parentElement.MaterialTextfield.change(mqtt_pwd);
+      } else {
+        window.clearTimeout(rescan_timer);
+      };
+
+      if (id == 3)
+      // 定时任务
+      {
+        GetTimedTask();
+      } else if (id == 4) {
+        // status
+        GetStatusInfo();
+      } else if (id == 6) {
+        // 日志
+        GetSysLog();
+      }
+
+    }
+    ShowPage(1);
+    //Menu-end
+
+    //Socket-start
+    var socket_ul = document.getElementById("socket_ul");
+    var checkboxs = socket_ul.getElementsByClassName("mdl-switch__input");
+    var switch_lables = socket_ul.getElementsByClassName("mdl-switch");
+    $(".mdl-switch__input").on("click", function () {
+      if (this.id == "task_on") return;
+      var sockets_st = "";
+      for (var i = 0; i < checkboxs.length; i++) {
+        sockets_st += (checkboxs[i].checked ? "1," : "0,");
+      }
+      HttpPost("/socket", function (re) {
+      }, sockets_st);
+    });
+    //Socket-end
+
+    //Config-start
+    $("#wifi_sel").on("change", function () {
+      var div_custom = $("#div_custom_ssid")[0];
+      var wifi_sel_id = $("input[name='wifi_sel']")[0];
+      var wifi_sel_name = $("#wifi_sel")[0];
+      var custom_ssid = $("#custom_ssid")[0];
+      if (wifi_sel_id.value == "0") {
+        div_custom.hidden = false;
+        custom_ssid.parentElement.MaterialTextfield.change("");
+      } else {
+        div_custom.hidden = true;
+        custom_ssid.parentElement.MaterialTextfield.change(wifi_sel_name.value);
       }
     });
-    chart_wth += power.powers.length;
-    $("#ct-chart").width(chart_wth * 10);
-    ct_chart.update(ct_data);
-    if (power.powers.length != 0 && x < 100) {
-      chart_par.scrollTo(chart_par.scrollWidth, 0);
+
+    $("#custom_ap").on("change", function () {
+      $("#div_custom_ssid")[0].hidden = false;
+      $("#div_wifi_sel")[0].hidden = true;
+    });
+    $("#custom_station").on("change", function () {
+      $("#div_custom_ssid")[0].hidden = true;
+      $("#div_wifi_sel")[0].hidden = false;
+    });
+
+    function Rescan() {
+      HttpPost("/wifi/scan", function (re) {
+        if (re == "OK") {
+          window.setTimeout(GetScanResult, 1000);
+        } else {
+          ShowToast(re);
+        }
+      });
     }
-    $("#uptime").html(power.up_time);
 
-    var w_v = (17.1 * power.p_count) / 1000 / 36000;
-    w.innerHTML = w_v.toFixed(2);
+    function GetScanResult() {
+      HttpGet("/wifi/scan", function (re) {
+        if (re != "NO") {
+          var wifi_sel_name = $("#wifi_sel").val();
+          if (!wifi_sel_name) {
+            wifi_sel_name = info_station_name;
+          }
+          var wifi_sel_id = $("input[name='wifi_sel']").val();
+          var ret = JSON.parse(re.replace(/'/g, '"')); //TODO: Fix this later
+          if (wifi_sel_id === "0") {
+            var html = "<li class='mdl-menu__item' data-val='0' data-selected='true'>Manual</li>";
+          } else {
+            var html = "<li class='mdl-menu__item' data-val='0'>Manual</li>";
+          }
+          for (var i = 0; i < ret.ssids.length; i++) {
+            if (wifi_sel_name == ret.ssids[i]) {
+              html += "<li class='mdl-menu__item' data-val='" + (i + 1) + "' data-selected='true'>" + ret.ssids[i] + "</li>";
+            } else {
+              html += "<li class='mdl-menu__item' data-val='" + (i + 1) + "'>" + ret.ssids[i] + "</li>";
+            }
+          }
+          ssid_slt.innerHTML = html;
+          getmdlSelect.init(".getmdl-select");
+          rescan_timer = window.setTimeout(Rescan, 20000);
+          return;
+        }
+        window.setTimeout(GetScanResult, 1000);
+      });
+    }
 
-    var status_arr = power.sockets.split(",");
-    for (var i = 0; i < status_arr.length; i++) {
-      //checkboxs[i].checked = status_arr[i] == "1";
-      if (status_arr[i] == "1") {
-        switch_lables[i].MaterialSwitch.on();
-      } else {
-        switch_lables[i].MaterialSwitch.off();
+    $("#mqtt_submit").on("click", function () {
+      var mqtt_addr = $("#mqtt_addr").val();
+      var mqtt_port = $("#mqtt_port").val();
+      var mqtt_usr = $("#mqtt_usr").val();
+      var mqtt_pwd = $("#mqtt_pwd").val();
+      var params = mqtt_addr + " " + mqtt_port + " " + mqtt_usr + " " + mqtt_pwd;
+      HttpPost("/mqtt/config", function (re) {
+        ShowToast(re);
+      }, params);
+    });
+
+    //Quotation Marks
+    function ContainQM(str) {
+      if (str == ""
+        || str.indexOf("'") >= 0
+        || str.indexOf('"') >= 0
+        || str.indexOf(' ') >= 0
+        || str.length > 32) {
+        return true;
       }
+      return false;
     }
 
-    window.setTimeout(GetPowerRecord, 3000);
-  }, power_idx.toString());
-}
-$(document).ready(function(){
-  GetPowerRecord();
-})
-//图表-end
+    var qm_mess = "Sorry, can't use ' or \" or space or empty.\n\nAlso, length <= 32."
+    var le_mess = "Sorry, length < 8."
 
-//定时任务-start
-$("#task_weekday").on("change", function() {
-  if ($("input[name='task_weekday']")[0].value != "0") {
-    $("#task_date")[0].hidden = true;
-  } else {
-    $("#task_date")[0].hidden = false;
-  }
-});
-function GetTimedTask() {
-  HttpGet("/task", function (re) {
-    var tb_html = "\
+    $("#wifi_submit").on("click", function () {
+      var mode = $("#custom_station").prop("checked") ? 1 : 0;
+      var ssid = $("#custom_ssid").val();
+      var passwd = $("#custom_password").val();
+      if (ContainQM(ssid) || ContainQM(passwd)) {
+        alert(qm_mess);
+        return;
+      }
+      if (passwd.length < 8) {
+        alert(le_mess);
+        return;
+      }
+      var params = mode + " " + ssid + " " + passwd;
+      HttpPost("/wifi/config", function (re) {
+        ShowToast(re);
+      }, params);
+    });
+    //Config-end
+
+
+
+    //定时任务-start
+    $("#task_weekday").on("change", function () {
+      if ($("input[name='task_weekday']")[0].value != "0") {
+        $("#task_date")[0].hidden = true;
+      } else {
+        $("#task_date")[0].hidden = false;
+      }
+    });
+
+    const numberToChinese = {
+      0: '无',
+      1: '周一',
+      2: '周二',
+      3: '周三',
+      4: '周四',
+      5: '周五',
+      6: '周六',
+      7: '周七',
+      8: '每天'
+    };
+    function GetTimedTask() {
+      HttpGet("/task", function (re) {
+        var tb_html = "\
     <tr>\
+      <th>ID</th>\
       <th>时间</th>\
       <th>插座</th>\
       <th>开关</th>\
       <th>循环</th>\
       <th>操作</th>\
     </tr>";
-    console.log(re);
-    var tasks = JSON.parse(re);
-    if (tasks.length == 0) {
-      tb_html += "<tr><td colspan='5'>没有定时任务</td></tr>";
-    }
-    for (var i = 0; i < tasks.length; i++) {
-      tb_html += "\
+        var tasks = JSON.parse(re);
+        if (tasks.length == 0) {
+          tb_html += "<tr><td colspan='5'>没有定时任务</td></tr>";
+        }
+        for (var i = 0; i < tasks.length; i++) {
+          tb_html += "\
       <tr>\
-        <td>" + tasks[i].prs_time + "</td>\
-        <td>" + tasks[i].socket_idx + "</td>\
-        <td>" + tasks[i].on + "</td>\
-        <td>" + tasks[i].weekday + "</td>\
-        <td><a href='javascript:DelTimedTask(" + tasks[i].timestamp + ");'>Delete</a></td>\
+        <td>" + tasks[i].id + "</td>\
+        <td>" + new Date(tasks[i].timestamp * 1000).Format("yy-MM-dd hh:mm") + "</td>\
+        <td>" + (Number(tasks[i].socket_idx) + 1) + "</td>\
+        <td>" + (tasks[i].on == '0' ? '关' : '开') + "</td>\
+        <td>" + ((tasks[i].weekday >= 0 && tasks[i].weekday <= 8) ? numberToChinese[tasks[i].weekday] : tasks[i].weekday) + "</td>\
+        <td><a href=\"#\" onclick=\"DelTimedTask("+ tasks[i].id + ")\">删除</a></td>\
       </tr>";
+        }
+        document.getElementById("timed_task_tb").innerHTML = tb_html;
+      });
     }
-    document.getElementById("timed_task_tb").innerHTML = tb_html;
-  });
-}
-GetTimedTask();
+    // GetTimedTask();
 
-var task_date = document.getElementById("task_date");
-var task_time = document.getElementById("task_time");
-//task_date.value = "2020-12-31";
-//task_time.value = "10:08:00";
-task_date.value = (new Date()).Format("yyyy-MM-dd");
-task_time.value = (new Date()).Format("hh:mm:ss");
-function AddTimedTask() {
-  var dat = task_date.value;
-  var tim = task_time.value;
-  var idx = document.getElementById("task_skt_idx").value;
-  var  on = document.getElementById("task_on").checked;
-  var wkd = $("input[name='task_weekday']")[0].value;
+    var task_date = document.getElementById("task_date");
+    var task_time = document.getElementById("task_time");
+    //task_date.value = "2020-12-31";
+    //task_time.value = "10:08:00";
+    task_date.value = (new Date()).Format("yyyy-MM-dd");
+    task_time.value = (new Date()).Format("hh:mm:ss");
+    function AddTimedTask() {
+      var dat = task_date.value;
+      var tim = task_time.value;
+      var idx = document.getElementById("task_skt_idx").value - 1;
+      var on = document.getElementById("task_on").checked;
+      var wkd = $("input[name='task_weekday']")[0].value;
 
-  datatime = dat + "T" + tim; // yyyy-MM-ddTHH:mm:ss
-  var prs_time = Math.round(new Date(datatime) / 1000);
-  //prs_time = prs_time + parseInt(sec);
-  on = on ? "1" : "0";
-  var cmd = prs_time + " " + idx + " " + on + " " + wkd;
-  if (cmd.length != 16) {
-    alert("CMD ERROR!");
-    return
-  }
-  HttpPost("/task", function (re) {
-    if (re != "OK") {
-      alert(re);
-      return;
+      datatime = dat + "T" + tim; // yyyy-MM-ddTHH:mm:ss
+      var prs_time = Math.round(new Date(datatime) / 1000);
+      //prs_time = prs_time + parseInt(sec);
+      on = on ? "1" : "0";
+      var cmd = prs_time + '|' + idx + on + wkd;
+      if (cmd.length != 14 || idx < 0 || idx > 5 || on < 0 || on > 1 || wkd < 0 || wkd > 8) {
+        alert("CMD ERROR：" + cmd);
+        return
+      }
+      HttpPost("/task", function (re) {
+        if (re != "OK") {
+          alert(re);
+          return;
+        }
+        GetTimedTask();
+      }, cmd);
     }
-    GetTimedTask();
-  }, cmd);
-}
-function DelTimedTask(timestamp) {
-  HttpDel("/task/"+timestamp, function (re) {
-    ShowToast("Delete timed task OK!");
-    GetTimedTask();
-  }, timestamp);
-}
-//定时任务-end
-
-//OTA-start
-function OtaStart() {
-  var ota_url = document.getElementById("ota_url").value;
-  HttpPost("/ota", function (re) {
-    OtaStatus();
-  }, ota_url);
-}
-var ota_status = document.querySelector('#ota_status');
-ota_status.addEventListener('mdl-componentupgraded', function() {
-  this.MaterialProgress.setProgress(0);
-});
-function OtaStatus() {
-  HttpGet("/ota", function (re) {
-    var percent = parseInt(re);
-    //console.log(re + " " + parseInt(re));
-    ota_status.MaterialProgress.setProgress(percent);
-    if (percent < 0) {
-      location.reload();
+    function DelTimedTask(taskinfo) {
+      HttpDel("/task/" + taskinfo, function (re) {
+        ShowToast("Delete timed task OK!");
+        GetTimedTask();
+      }, taskinfo);
     }
-    window.setTimeout(OtaStatus, 1000);
-  });
-}
-//OTA-end
+    //定时任务-end
 
-//日志-start
-var sys_log = document.getElementById("sys_log");
-var log_div = document.getElementsByClassName("sys-log")[0];
-function GetSysLog() {
-  HttpGet("/log", function (re) {
-    sys_log.innerHTML = re;
-    log_div.scrollTo(0, log_div.scrollHeight);
-  });
-}
-GetSysLog();
-//日志-end
+    //OTA-start
+    function OtaStart() {
+      var ota_url = document.getElementById("ota_url").value;
+      HttpPost("/ota", function (re) {
+        OtaStatus();
+      }, ota_url);
+    }
+    var ota_status = document.querySelector('#ota_status');
+    ota_status.addEventListener('mdl-componentupgraded', function () {
+      this.MaterialProgress.setProgress(0);
+    });
+    function OtaStatus() {
+      HttpGet("/ota", function (re) {
+        var percent = parseInt(re);
+        //console.log(re + " " + parseInt(re));
+        ota_status.MaterialProgress.setProgress(percent);
+        if (percent < 0) {
+          location.reload();
+        }
+        window.setTimeout(OtaStatus, 1000);
+      });
+    }
+    //OTA-end
 
-</script>
-  </body>
+    //日志-start
+    var sys_log = document.getElementById("sys_log");
+    var log_div = document.getElementsByClassName("sys-log")[0];
+    function GetSysLog() {
+      HttpGet("/log", function (re) {
+        sys_log.innerHTML = re;
+        log_div.scrollTo(0, log_div.scrollHeight);
+      });
+    }
+    // GetSysLog();
+    //日志-end
+
+  </script>
+</body>
+
 </html>

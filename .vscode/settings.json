@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "user_mqtt_client.h": "c",
+        "web_log.h": "c",
+        "http_parse.h": "c",
+        "timed_task.h": "c",
+        "main.h": "c",
+        "user_gpio.h": "c",
+        "mico.h": "c",
+        "http-strings.h": "c",
+        "app_httpd.h": "c",
+        "httpd.h": "c"
+    }
+}

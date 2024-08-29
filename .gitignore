@@ -4,5 +4,10 @@ build
 zTC1.*
 *.bin
 *.rar
-
+.DS_Store
 TC1/http_server/web/assets/*
+mico-os
+.gdbinit
+.cproject
+.openocd_cfg
+.project
